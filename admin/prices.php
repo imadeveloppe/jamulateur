@@ -139,15 +139,15 @@ if(isset($_POST['address'],$_POST['id'])){
                 <!-- Custom Tabs -->
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                      <li class="active"><a href="#tab_1" data-toggle="tab">Jam Mobile</a></li>
-                      <li><a href="#tab_2" data-toggle="tab">Jam Son</a></li>
-                      <li><a href="#tab_3" data-toggle="tab">Les Visuels</a></li> 
-                      <li><a href="#tab_4" data-toggle="tab">Le Son</a></li> 
-                      <li><a href="#tab_5" data-toggle="tab">Les Options</a></li> 
-                      <li><a href="#tab_6" data-toggle="tab">Autres</a></li> 
+                      <li class="<?= (!isset($_GET['tab']) || $_GET['tab'] == 1 ) ? 'active' : '' ?>"><a href="#tab_1" data-toggle="tab">Jam Mobile</a></li>
+                      <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 2 ) ? 'active' : '' ?>"><a href="#tab_2" data-toggle="tab">Jam Son</a></li>
+                      <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 3 ) ? 'active' : '' ?>"><a href="#tab_3" data-toggle="tab">Les Visuels</a></li> 
+                      <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 4 ) ? 'active' : '' ?>"><a href="#tab_4" data-toggle="tab">Le Son</a></li> 
+                      <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 5 ) ? 'active' : '' ?>"><a href="#tab_5" data-toggle="tab">Les Options</a></li> 
+                      <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 6 ) ? 'active' : '' ?>"><a href="#tab_6" data-toggle="tab">Paramétrage</a></li>  
                     </ul>
                     <div class="tab-content">
-                      <div class="tab-pane active" id="tab_1">
+                      <div class="tab-pane <?= (!isset($_GET['tab']) || $_GET['tab'] == 1 ) ? 'active' : '' ?>" id="tab_1">
                         <form method="post" action="update-prices.php">
                           <div class="row form-group">
                            <label class="col-xs-2"  align="right">Nombre de jour</label>
@@ -178,7 +178,7 @@ if(isset($_POST['address'],$_POST['id'])){
                         </form>
                       </div>
                       <!-- /.tab-pane -->
-                      <div class="tab-pane" id="tab_2">
+                      <div class="tab-pane <?= (isset($_GET['tab']) && $_GET['tab'] == 2 ) ? 'active' : '' ?>" id="tab_2">
                           <form method="post" action="update-prices.php">
                             <div class="row form-group">
                              <label class="col-xs-2"  align="right">Nombre de jour</label>
@@ -203,13 +203,14 @@ if(isset($_POST['address'],$_POST['id'])){
                              <label class="col-xs-2"  align="right"></label>
                              <label class="col-xs-10">
                                <input type="hidden" name="type" value="JamSon">
+                               <input type="hidden" name="tab" value="2">
                                <button class="btn btn-block btn-success">Mise à jour</button>
                              </label>
                             </div>
                           </form>
                       </div>
                       <!-- /.tab-pane -->
-                      <div class="tab-pane" id="tab_3">
+                      <div class="tab-pane <?= (isset($_GET['tab']) && $_GET['tab'] == 3 ) ? 'active' : '' ?>" id="tab_3">
                          
                       <form method="post" action="update-prices.php">
                             <div class="row form-group">
@@ -242,6 +243,7 @@ if(isset($_POST['address'],$_POST['id'])){
                              <label class="col-xs-9"  align="right"></label>
                              <label class="col-xs-3" align="right">
                                <input type="hidden" name="type" value="visuel">
+                               <input type="hidden" name="tab" value="3">
                                <button class="btn btn-success btn-block">Mise à jour</button>
                              </label>
                             </div>
@@ -249,7 +251,7 @@ if(isset($_POST['address'],$_POST['id'])){
 
                       </div>
                       <!-- /.tab-pane -->
-                       <div class="tab-pane" id="tab_4">
+                       <div class="tab-pane <?= (isset($_GET['tab']) && $_GET['tab'] == 4 ) ? 'active' : '' ?>" id="tab_4">
                          
                          <form method="post" action="update-prices.php">
                             <div class="row form-group">
@@ -282,6 +284,7 @@ if(isset($_POST['address'],$_POST['id'])){
                              <label class="col-xs-9"  align="right"></label>
                              <label class="col-xs-3" align="right">
                                <input type="hidden" name="type" value="son">
+                               <input type="hidden" name="tab" value="4">
                                <button class="btn btn-success btn-block">Mise à jour</button>
                              </label>
                             </div>
@@ -289,7 +292,7 @@ if(isset($_POST['address'],$_POST['id'])){
                          
                       </div>
                       <!-- /.tab-pane -->
-                       <div class="tab-pane" id="tab_5">
+                       <div class="tab-pane <?= (isset($_GET['tab']) && $_GET['tab'] == 5 ) ? 'active' : '' ?>" id="tab_5">
                           
                           <form method="post" action="update-prices.php">
                             <div class="row form-group">
@@ -322,6 +325,7 @@ if(isset($_POST['address'],$_POST['id'])){
                              <label class="col-xs-9"  align="right"></label>
                              <label class="col-xs-3" align="right">
                                <input type="hidden" name="type" value="options">
+                               <input type="hidden" name="tab" value="5">
                                <button class="btn btn-success btn-block">Mise à jour</button>
                              </label>
                             </div>
@@ -329,9 +333,9 @@ if(isset($_POST['address'],$_POST['id'])){
                          
                          
                         </div>
-                        <!-- /.tab-pane -->
 
-                        <div class="tab-pane" id="tab_6">
+                        <div class="tab-pane <?= (isset($_GET['tab']) && $_GET['tab'] == 6 ) ? 'active' : '' ?>" id="tab_6">
+                          
                           <form method="post" action="update-prices.php">
                             <div class="row form-group">
                              <label class="col-xs-8">Options</label>
@@ -342,11 +346,39 @@ if(isset($_POST['address'],$_POST['id'])){
                               $query = $db->query("SELECT * FROM autres");
                               $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             ?>   
-                             <hr>
+                            <hr>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <h4><strong>Vidéo mapping</strong></h4>
+                              </div>
+                            </div> 
+                            <hr>          
                             <div class="row form-group">
                              <div class="col-xs-8">
-                                Coût d’hébergement - restauration d’une journée d’intervenant image
-                             </div>
+                                Prix d’installation d’1 véhicule jamion
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[4][id]" value="<?= $result[4]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[4][price]" value="<?= $result[4]['price'] ?>">
+                             </div> 
+                            </div> 
+          
+                            <hr>
+
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Prix de rémunération (en jour) d’un technicien Vidéo-Mapping
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[5][id]" value="<?= $result[5]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[5][price]" value="<?= $result[5]['price'] ?>">
+                             </div> 
+                            </div>
+                            <hr>
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Hébergement équipe
+                             </div> 
                              <div class="col-xs-4">
                                 <input type="hidden" name="fields[0][id]" value="<?= $result[0]['id'] ?>">
                                 <input type="text" class="form-control" name="fields[0][price]" value="<?= $result[0]['price'] ?>">
@@ -355,8 +387,47 @@ if(isset($_POST['address'],$_POST['id'])){
                             <hr>
                             <div class="row form-group">
                              <div class="col-xs-8">
-                                Coût d’hébergement - restauration d’une journée d’intervenant son
-                             </div>
+                                Transport (Coût / km)
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[2][id]" value="<?= $result[2]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[2][price]" value="<?= $result[2]['price'] ?>">
+                             </div> 
+                            </div>
+
+
+                            <div class="row">
+                              <div class="col-md-12">
+                                <h4><strong>Sonorisation</strong></h4>
+                              </div>
+                            </div> 
+                            <hr>          
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Prix d’installation d’1 véhicule son
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[6][id]" value="<?= $result[6]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[6][price]" value="<?= $result[6]['price'] ?>">
+                             </div> 
+                            </div> 
+          
+                            <hr>
+
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Prix de rémunération (en jour) d’un technicien Son
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[7][id]" value="<?= $result[7]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[7][price]" value="<?= $result[7]['price'] ?>">
+                             </div> 
+                            </div>
+                            <hr>
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                               Hébergement équipe
+                             </div> 
                              <div class="col-xs-4">
                                 <input type="hidden" name="fields[1][id]" value="<?= $result[1]['id'] ?>">
                                 <input type="text" class="form-control" name="fields[1][price]" value="<?= $result[1]['price'] ?>">
@@ -365,33 +436,50 @@ if(isset($_POST['address'],$_POST['id'])){
                             <hr>
                             <div class="row form-group">
                              <div class="col-xs-8">
-                                Coût de déplacement image / Km
-                             </div>
-                             <div class="col-xs-4">
-                                <input type="hidden" name="fields[2][id]" value="<?= $result[2]['id'] ?>">
-                                <input type="text" class="form-control" name="fields[2][price]" value="<?= $result[2]['price'] ?>">
+                                Transport (Coût / km)
                              </div> 
-                            </div> 
-                            <hr>
-                            <div class="row form-group">
-                             <div class="col-xs-8">
-                                Coût de déplacement son / Km
-                             </div>
                              <div class="col-xs-4">
                                 <input type="hidden" name="fields[3][id]" value="<?= $result[3]['id'] ?>">
                                 <input type="text" class="form-control" name="fields[3][price]" value="<?= $result[3]['price'] ?>">
                              </div> 
-                            </div> 
+                            </div>
+
                             <hr>
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Taux taxe Sacem à appliquer (en %)
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[8][id]" value="<?= $result[8]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[8][price]" value="<?= $result[8]['price'] ?>">
+                             </div> 
+                            </div>
+
+                            <hr>
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Prix unitaire d’une soirée de gardiennage
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[9][id]" value="<?= $result[9]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[9][price]" value="<?= $result[9]['price'] ?>">
+                             </div> 
+                            </div>
+                          
                             <div class="row form-group">
                              <label class="col-xs-9"  align="right"></label>
                              <label class="col-xs-3" align="right">
                                <input type="hidden" name="type" value="autres">
+                               <input type="hidden" name="tab" value="6">
                                <button class="btn btn-success btn-block">Mise à jour</button>
                              </label>
                             </div>
+                             
                           </form>
+                         
+                         
                         </div>
+                        <!-- /.tab-pane --> 
                     </div>
                     <!-- /.tab-content -->
                   </div>

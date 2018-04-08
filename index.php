@@ -345,6 +345,7 @@
 				 							<select name="video_jamions">
 					 							<option value="1">1</option>   
 					 							<option value="2">2</option>   
+					 							<option value="3">3</option>   
 					 						</select>
 				 						</div>
 				 					</div>
@@ -356,6 +357,10 @@
 				 							<select name="video_techniciens">
 					 							<option value="1">1</option>   
 					 							<option value="2">2</option>   
+					 							<option value="3">3</option>    
+					 							<option value="4">4</option>    
+					 							<option value="5">5</option>    
+					 							<option value="6">6</option>    
 					 						</select>
 				 						</div>
 				 					</div>
@@ -394,9 +399,10 @@
 				 							<label class="subtitle"># UNITES SON</label>
 				 						</div>
 				 						<div class="selectContainer">
-				 							<select name="sonorisation_jamions">
+				 							<select name="sonorisation_unite">
 					 							<option value="1">1</option>   
 					 							<option value="2">2</option>   
+					 							<option value="3">3</option> 
 					 						</select>
 				 						</div>
 				 					</div>
@@ -408,6 +414,10 @@
 				 							<select name="sonorisation_techniciens">
 					 							<option value="1">1</option>   
 					 							<option value="2">2</option>   
+					 							<option value="3">3</option>    
+					 							<option value="4">4</option>    
+					 							<option value="5">5</option>    
+					 							<option value="6">6</option>       
 					 						</select>
 				 						</div>
 				 					</div>
@@ -425,18 +435,18 @@
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label for="video_transport" class="subtitle">TRANSPORT</label>
+				 							<label for="sonorisation_transport" class="subtitle">TRANSPORT</label>
 				 						</div>
 				 						<div>
-				 							<input type="checkbox" id="video_transport" name="sonorisation_transport">
+				 							<input type="checkbox" id="sonorisation_transport" name="sonorisation_transport">
 				 						</div>
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label for="video_transport" class="subtitle">TAXE SACEM</label>
+				 							<label for="sonorisation_taxe_sacem" class="subtitle">TAXE SACEM</label>
 				 						</div>
 				 						<div>
-				 							<input type="checkbox" id="sonorisation_transport" name="sonorisation_taxe_sacem">
+				 							<input type="checkbox" id="sonorisation_taxe_sacem" name="sonorisation_taxe_sacem">
 				 						</div>
 				 					</div>
 				 				</div>
@@ -676,7 +686,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.fr.js"></script>   
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyD9qWb51Zg3oUowbJHGox-VCWu4C5zDOzs&language=fr"></script>  
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyCUBPErUcahZbvPkAqtZ2w4Ny7u_QV3x5c&language=fr"></script>  
 
 <script type="text/javascript" src="js/script.js"></script> 
 <script type="text/javascript"> 

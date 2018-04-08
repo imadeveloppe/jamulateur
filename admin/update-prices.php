@@ -55,8 +55,7 @@ if( isset($_POST['type']) ):
 
 
 		case 'autres':
-			unset($_POST['type']);
-			 
+			unset($_POST['type']); 
 			foreach ($_POST['fields'] as $key => $field) {
 				extract($field); 
 				$query = $db->prepare("UPDATE autres SET price = '$price'  WHERE id = $id");
@@ -66,7 +65,7 @@ if( isset($_POST['type']) ):
 		 
 	}
 
-	header('location:prices.php');
+	header('location:prices.php?tab='.$_POST['tab']);
 
 
 endif;

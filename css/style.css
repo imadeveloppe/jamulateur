@@ -831,6 +831,7 @@ label.error{
 .block-3 > .content .item-1-1 .jcf-checkbox span { 
     height: 7px;
     width: 12px; 
+    border-color: #000003;
 }
 .block-3 > .content .item-1-1 .jcf-checkbox { 
     width: 22px;

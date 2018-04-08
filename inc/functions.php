@@ -123,7 +123,7 @@
 		$query = $db->query("SELECT slug, price from autres");
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($result as $key => $value) {
-			$data['autres'][$value['slug']] = intval($value['price']);
+			$data['autres'][$value['slug']] = floatval($value['price']);
 		}
 		/////////////////////////////////////////////////////////
 
@@ -260,20 +260,11 @@
 				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
 				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ] ),
 				"TotalTTC" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ] + TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ] )	
-			),
-
-			/////////////////////////////////////////////// Transport et hebergement /////////////////////////////////////////////////////////
-			"transpHeberg" => array(
-				"qte" 			=> 1,
-				"prixUnitaire" 	=> $PriceTransportHeberg,
-				"totalHT" 		=> $PriceTransportHeberg,
-				"TVA" 			=> TVA( $PriceTransportHeberg ),
-				"TotalTTC" 		=> $PriceTransportHeberg + TVA( $PriceTransportHeberg )	
-			),
+			), 
 
 			/////////////////////////////////////////////// Demarches administratives /////////////////////////////////////////////////////////
 			"GestDemarAdmin" => array(
-				"qte" 			=> 1,
+				"qte" 			=> ($GestDemarAdmin > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $GestDemarAdmin,
 				"totalHT" 		=> $GestDemarAdmin,
 				"TVA" 			=> TVA( $GestDemarAdmin ),
@@ -282,28 +273,28 @@
 
 			/////////////////////////////////////////////// options  /////////////////////////////////////////////////////////
 			"captationVideo" => array(
-				"qte" 			=> 1,
+				"qte" 			=> ($captationVideo > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $captationVideo,
 				"totalHT" 		=> $captationVideo,
 				"TVA" 			=> TVA( $captationVideo ),
 				"TotalTTC" 		=> $captationVideo + TVA( $captationVideo )	
 			),
 			"liveVideo" => array(
-				"qte" 			=> 1,
+				"qte" 			=> ($liveVideo > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $liveVideo,
 				"totalHT" 		=> $liveVideo,
 				"TVA" 			=> TVA( $liveVideo ),
 				"TotalTTC" 		=> $liveVideo + TVA( $liveVideo )	
 			),
 			"affiche" => array(
-				"qte" 			=> 1,
+				"qte" 			=> ($affiche > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $affiche,
 				"totalHT" 		=> $affiche,
 				"TVA" 			=> TVA( $affiche ),
 				"TotalTTC" 		=> $affiche + TVA( $affiche )	
 			),
 			"siteWeb" => array(
-				"qte" 			=> 1,
+				"qte" 			=> ($siteWeb > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $siteWeb,
 				"totalHT" 		=> $siteWeb,
 				"TVA" 			=> TVA( $siteWeb ),

@@ -262,7 +262,7 @@
 				<td align="right"><?= number_format($subTotal['videoMapimg']['TTC'],2,',',' ' ) ?> €</td>
 			</tr>
 			<tr>
-				<td>BIBLIOTHÈQUE DE CONTENUS PRÊTS À JAMMER</td>
+				<td>Bibliothèque de contenus prêts à jammer</td>
 				<td align="right"><?= $DataCalcule['visuel']['qte'] ?></td>
 				<td>Minutes</td>
 				<td align="right"><?= number_format($DataCalcule['visuel']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -271,8 +271,21 @@
 				<td align="right"><?= number_format($DataCalcule['visuel']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($DataCalcule['visuel']['TotalTTC'],2,',',' ' ) ?> €</td>
 			</tr>
+	
+
 			<tr>
-				<td>LOCATION MATERIEL + MISE A DISPOSITION TECHNICIENS + TRANSPORT</td>
+				<td>Prix d’installation pour les x jamions</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr> 
+
+			<tr>
+				<td>Location materiel + mise a disposition techniciens + transport</td>
 				<td align="right"><?= $DataCalcule['JamMobile']['qte'] ?></td>
 				<td>Forfait</td>
 				<td align="right"><?= number_format($DataCalcule['JamMobile']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -280,6 +293,39 @@
 				<td align="center">20%</td>
 				<td align="right"><?= number_format($DataCalcule['JamMobile']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($DataCalcule['JamMobile']['TotalTTC'],2,',',' ' ) ?> €</td>
+			</tr>
+
+			<tr>
+				<td>Rémunération des techniciens de vidéo mapping</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+			<tr>
+				<td>Hébergement des techniciens de vidéo mapping</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+			<tr>
+				<td>Transport des techniciens de vidéo mapping</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
 			</tr>
 
 
@@ -304,7 +350,7 @@
 				<td align="right"><?= number_format($subTotal['sonorisation']['TTC'],2,',',' ' ) ?> €</td>
 			</tr>
 			<tr>
-				<td>SON ÉXISTANT</td>
+				<td>Son éxistant</td>
 				<td align="right"><?= $DataCalcule['son']['qte'] ?></td>
 				<td>Minutes</td>
 				<td align="right"><?= number_format($DataCalcule['son']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -313,8 +359,22 @@
 				<td align="right"><?= number_format($DataCalcule['son']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($DataCalcule['son']['TotalTTC'],2,',',' ' ) ?> €</td>
 			</tr>
+
+
 			<tr>
-				<td>LOCATION MATERIEL + MISE A DISPOSITION TECHNICIENS + TRANSPORT</td>
+				<td>Prix d’installation pour les x unités de son</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+
+			<tr>
+				<td>Location materiel + mise a disposition techniciens + transport</td>
 				<td align="right"><?= $DataCalcule['JamSon']['qte'] ?></td>
 				<td>Forfait</td>
 				<td align="right"><?= number_format($DataCalcule['JamSon']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -322,35 +382,50 @@
 				<td align="center">20%</td>
 				<td align="right"><?= number_format($DataCalcule['JamSon']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($DataCalcule['JamSon']['TotalTTC'],2,',',' ' ) ?> €</td>
+			</tr> 
+
+			<tr>
+				<td>Rémunération des techniciens de son</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
 			</tr>
 
-
-
-
-
-
-
-			<tr class="subTotal">
-				<td>
-					TRANSPORT - HEBERGEMENT
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['totalHT'],2,',',' ' ) ?> €</td>
-				<td></td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr> 
 			<tr>
-				<td>TRANSPORT - HEBERGEMENT</td>
-				<td align="right"><?= $DataCalcule['transpHeberg']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['totalHT'],2,',',' ' ) ?> €</td>
+				<td>Hébergement des techniciens de son</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
 				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['transpHeberg']['TotalTTC'],2,',',' ' ) ?> €</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+			<tr>
+				<td>Transport des techniciens de son</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+			<tr>
+				<td>Taxe sacem</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
 			</tr>
 
 
@@ -372,7 +447,7 @@
 				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TotalTTC'],2,',',' ' ) ?> €</td>
 			</tr> 
 			<tr>
-				<td>GESTION DES DEMARCHES ADMINISTRATIVES	 </td>
+				<td>Gestion des demarches administratives</td>
 				<td align="right"><?= $DataCalcule['GestDemarAdmin']['qte'] ?></td>
 				<td>Forfait</td>
 				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -437,6 +512,32 @@
 				<td align="right"><?= number_format($DataCalcule['siteWeb']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($DataCalcule['siteWeb']['TotalTTC'],2,',',' ' ) ?> €</td>
 			</tr>  
+
+
+			<tr class="subTotal">
+				<td>
+					AUTRES
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr> 
+			<tr>
+				<td>Prestation de gardinnage</td>
+				<td align="right"></td>
+				<td></td>
+				<td align="right"></td>
+				<td align="right"></td>
+				<td align="center">20%</td>
+				<td align="right"></td>
+				<td align="right"></td>
+			</tr>
+
+
 
 		</table>
 		<table style="margin-top: 10px;" >

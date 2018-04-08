@@ -232,8 +232,29 @@
                     visuel      : $('[name=index-images-animees]').val(),
                     son         : $('[name=index-son]').val(),
                     nbrBoucles  : parseInt( $('[name=nbrBoucles]').val() ),
-                    options     : ($('[name=index-option]').val() != '') ? $('[name=index-option]').val().split(',') : []
-                }    
+                    options     : ($('[name=index-option]').val() != '') ? $('[name=index-option]').val().split(',') : [],
+                    video_maping:{
+                        jamions: $('[name=video_jamions]').val(),
+                        techniciens: $('[name=video_techniciens]').val(),
+                        hebergement: $('[name=video_hebergement]').is(':checked'),
+                        transport:  $('[name=video_transport]').is(':checked')
+                    },
+                    sonorisation:{
+                        unite: $('[name=sonorisation_unite]').val(),
+                        techniciens: $('[name=sonorisation_techniciens]').val(),
+                        hebergement: $('[name=sonorisation_hebergement]').is(':checked'),
+                        transport:  $('[name=sonorisation_transport]').is(':checked'),
+                        taxe_sacem:  $('[name=sonorisation_taxe_sacem]').is(':checked')
+                    },
+                    autres: {
+                        gardinnage:  $('[name=autre_gardinnage]').is(':checked'),
+                        remise_montant:  $('[name=remise_montant]').val(),
+                        remise_pourcentage:  $('[name=remise_pourcentage]').val(),
+                    }
+                }   
+
+                console.log(data)
+
                 if( interval ) return false; 
                 var totalDevis = 0;   
  
@@ -263,29 +284,71 @@
                      totalDevis += GlobalData.options[ option ]
                 });
 
-                // Coût d’hébergement - restauration d’une journée d’intervenant image
-                 
-                var priceHebergementImage = GlobalData.autres.priceHebergementImage; 
-                totalDevis += (priceHebergementImage * 2) * (nbrJour + 2);
-
-                // Coût d’hébergement - restauration d’une journée d’intervenant son
-                if( GlobalData.son[ data.son ] > 0 ){
-                    var priceHebergementSon = GlobalData.autres.priceHebergementSon;
-                    totalDevis += priceHebergementSon * (nbrJour + 2);
-                }
 
 
-                // Coût de deplacement image 
-                var priceDeplacementImage = GlobalData.autres.priceDeplacementImage; 
-                totalDevis += priceDeplacementImage * distance;
+                // Video Mapping
+                    // Jamions
+                    totalDevis += GlobalData.autres.priceJamionImage * data.video_maping.jamions;
 
-                // Coût de deplacement son
-                if( GlobalData.son[ data.son ] > 0 ){
-                    var priceDeplacementSon = GlobalData.autres.priceDeplacementSon;
-                    totalDevis += priceDeplacementSon * distance;
-                }
+                    // TECHNICIENS
+                    totalDevis += GlobalData.autres.priceTechnicienImage * data.video_maping.techniciens;
 
-                
+                    // Hebergement
+                    if( data.video_maping.hebergement ){
+                        var priceHebergementImage = GlobalData.autres.priceHebergementImage; 
+                        totalDevis += (priceHebergementImage * 2) * (nbrJour + 2);
+                    }
+
+                    //Transport 
+                    if( data.video_maping.transport ){
+                        var priceDeplacementImage = GlobalData.autres.priceDeplacementImage; 
+                        totalDevis += priceDeplacementImage * distance;
+                    }
+
+
+                // Sonorisation
+                    // unites
+                    totalDevis += GlobalData.autres.priceVehiculeSon * data.sonorisation.unite;
+
+                    // TECHNICIENS
+                    totalDevis += GlobalData.autres.priceTechnicienSon * data.sonorisation.techniciens;
+
+                    // Hebergement
+                    if( GlobalData.son[ data.son ] > 0 && data.sonorisation.hebergement ){
+                        var priceHebergementSon = GlobalData.autres.priceHebergementSon; 
+                        totalDevis += priceHebergementSon * (nbrJour + 2);
+                    }
+
+                    //Transport 
+                    if(  GlobalData.son[ data.son ] > 0 && data.sonorisation.transport ){
+                        var priceDeplacementSon = GlobalData.autres.priceDeplacementSon; 
+                        totalDevis += priceDeplacementSon * (nbrJour + 2);
+                    }
+
+                    //Taxe Sacem 
+                    if( data.sonorisation.taxe_sacem ){
+                        var taxeSacem = GlobalData.autres.taxeSacem; 
+                        totalDevis += (totalDevis * taxeSacem) / 100  ;
+                    }
+
+
+                //Autre
+                    // Gardinnage 
+                    if( data.autres.gardinnage ){
+                        var priceGardiennage = GlobalData.autres.priceGardiennage; 
+                        totalDevis += priceGardiennage * nbrJour  ;
+                    }
+
+                    // remise montant Eauro
+                    if( data.autres.remise_montant != '' ){  
+                        totalDevis -= parseFloat( data.autres.remise_montant );
+                    }
+
+                    // remise %
+                    if( data.autres.remise_pourcentage != '' ){  
+                        totalDevis -= (totalDevis * parseFloat( data.autres.remise_pourcentage )) / 100;
+                    }
+      
 
                 setTimeout(function () {
 
@@ -345,6 +408,7 @@
 
  
         var formData = new FormData();
+ 
 
         formData.append("distance"      , $('#formDevis [name=distance]').val() );
 
@@ -361,6 +425,20 @@
         formData.append("nbrBoucles"    , $('#formDevis [name=nbrBoucles]').val() ); 
         formData.append("son"           , $('#formDevis [name=index-son]').val() ); 
         formData.append("options"       , $('#formDevis [name=index-option]').val() ); 
+
+        formData.append("video_jamions"           , $('#formDevis [name=video_jamions]').val() ); 
+        formData.append("video_techniciens"       , $('#formDevis [name=video_techniciens]').val() ); 
+        formData.append("video_hebergement"       , $('#formDevis [name=video_hebergement]').is(':checked')*1 ); 
+        formData.append("video_transport"         , $('#formDevis [name=video_transport]').is(':checked')*1 ); 
+        formData.append("sonorisation_unite"      , $('#formDevis [name=sonorisation_unite]').val() ); 
+        formData.append("sonorisation_techniciens", $('#formDevis [name=sonorisation_techniciens]').val() ); 
+        formData.append("sonorisation_hebergement", $('#formDevis [name=sonorisation_hebergement]').is(':checked')*1 ); 
+        formData.append("sonorisation_transport"  , $('#formDevis [name=sonorisation_transport]').is(':checked')*1 ); 
+        formData.append("sonorisation_taxe_sacem" , $('#formDevis [name=sonorisation_taxe_sacem]').is(':checked')*1 ); 
+        formData.append("autre_gardinnage"        , $('#formDevis [name=autre_gardinnage]').is(':checked')*1 ); 
+        formData.append("remise_montant"          , $('#formDevis [name=remise_montant]').val() ); 
+        formData.append("remise_pourcentage"      , $('#formDevis [name=remise_pourcentage]').val() ); 
+
         formData.append("email"         , $('#SendDevis [name=email]').val() ); 
         formData.append("tel"           , $('#SendDevis [name=tel]').val() ); 
         formData.append("societe"       , $('#SendDevis [name=societe]').val() ); 
@@ -784,12 +862,28 @@ var interval = false;
             if( !$('#formDevis [name=cp], #formDevis [name=ville]').is(':focus') ){
                 if( !$("#formDevis [name=cp]").valid() ) return false;
                 if( !$("#formDevis [name=ville]").valid() ) return false;   
-                getDistance()
+                getDistance();
             } 
         })
     })
 
+    $('[name=video_jamions],[name=video_techniciens],[name=video_hebergement],[name=video_transport],[name=sonorisation_unite],[name=sonorisation_techniciens],[name=sonorisation_hebergement],[name=sonorisation_transport],[name=sonorisation_taxe_sacem],[name=autre_gardinnage]').change(function () {
+         calculate();
+    })
 
+
+    $('[name=remise_montant]').keyup(function () {
+        $('[name=remise_pourcentage]').val('')
+        setTimeout(function () {
+            calculate();
+        })
+    }) 
+    $('[name=remise_pourcentage]').keyup(function () {
+        $('[name=remise_montant]').val('')
+        setTimeout(function () {
+            calculate();
+        })
+    }) 
 
     /// google maps auto complate
     google.maps.event.addDomListener(window, 'load', function () {
