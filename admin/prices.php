@@ -352,6 +352,17 @@ if(isset($_POST['address'],$_POST['id'])){
                                 <h4><strong>Vidéo mapping</strong></h4>
                               </div>
                             </div> 
+                            <hr>    
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Nombre maximal des véhicules jamions
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[12][id]" value="<?= $result[12]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[12][price]" value="<?= $result[12]['price'] ?>">
+                             </div> 
+                            </div>
+
                             <hr>          
                             <div class="row form-group">
                              <div class="col-xs-8">
@@ -362,7 +373,18 @@ if(isset($_POST['address'],$_POST['id'])){
                                 <input type="text" class="form-control" name="fields[4][price]" value="<?= $result[4]['price'] ?>">
                              </div> 
                             </div> 
-          
+
+                            <hr>
+
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Nombre maximal des techniciens Vidéo-Mapping
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[10][id]" value="<?= $result[10]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[10][price]" value="<?= $result[10]['price'] ?>">
+                             </div> 
+                            </div>
                             <hr>
 
                             <div class="row form-group">
@@ -401,6 +423,16 @@ if(isset($_POST['address'],$_POST['id'])){
                                 <h4><strong>Sonorisation</strong></h4>
                               </div>
                             </div> 
+                            <hr>    
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Nombre maximal des véhicules son
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[13][id]" value="<?= $result[13]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[13][price]" value="<?= $result[13]['price'] ?>">
+                             </div> 
+                            </div>
                             <hr>          
                             <div class="row form-group">
                              <div class="col-xs-8">
@@ -411,7 +443,17 @@ if(isset($_POST['address'],$_POST['id'])){
                                 <input type="text" class="form-control" name="fields[6][price]" value="<?= $result[6]['price'] ?>">
                              </div> 
                             </div> 
-          
+                            <hr>
+                            <div class="row form-group">
+                             <div class="col-xs-8">
+                                Nombre maximal des techniciens son
+                             </div> 
+                             <div class="col-xs-4">
+                                <input type="hidden" name="fields[11][id]" value="<?= $result[11]['id'] ?>">
+                                <input type="text" class="form-control" name="fields[11][price]" value="<?= $result[11]['price'] ?>">
+                             </div> 
+                            </div>
+
                             <hr>
 
                             <div class="row form-group">

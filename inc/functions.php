@@ -9,15 +9,15 @@
 	}
 	function db_connect(){
 		
-		// $servername = "db696840967.db.1and1.com";
-		// $username = "dbo696840967";
-		// $password = "Zento&EI@2017"; // 
-		// $dbname = "db696840967";
-
 		$servername = "localhost";
-		$username = "root";
-		$password = "root"; // Zento&EI@2017
-		$dbname = "jammulator";
+		$username = "jamuser";
+		$password = "J@MZTO2o18"; // 
+		$dbname = "jamulateur";
+
+		// $servername = "localhost";
+		// $username = "root";
+		// $password = "root"; // Zento&EI@2017
+		// $dbname = "jammulator";
 
 		try {
 			    $db = new PDO("mysql:host=$servername;dbname=".$dbname, $username, $password);
@@ -155,8 +155,19 @@
 	}
 	function TVA( $amount ){
 
-		return ($amount * 20)/100;
+		return  ($amount == 0) ? 0 : ($amount * 20)/100;
 	}
+
+	function HTTC( $amount ){
+
+		return ($amount == 0) ? 0 : $amount + ($amount * 20)/100;
+	}
+
+	function TAXE( $amount, $taxe ){
+
+		return ($amount * $taxe)/100;
+	}
+
 
 	function getFrenchDate( $timestamp ){	
 		
@@ -229,6 +240,10 @@
 	 	$affiche = (in_array('affiche', $infos['options'])) ? $DataPrices['options']['affiche'] : 0;
 		////////////////////////////////////////////////
 		
+		$infos['nbrJoursPlus2'] = $infos['nbrJours'] + 2;
+
+		//printR(array($result, $DataPrices)) ;	
+
 		$DataCalcule = array(
 			/////////////////////////////////////////// VIDÉO MAPPING /////////////////////////////////////////////////////////////
 			"visuel" => array(
@@ -236,14 +251,43 @@
 				"prixUnitaire" 	=> $DataPrices['visuel'][ $result['visuel'] ],
 				"totalHT" 		=> $DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles'],
 				"TVA" 			=> TVA( $DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles'] ),
-				"TotalTTC" 		=> ($DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles']) + TVA( $DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles'] )	
+				"TotalTTC" 		=> HTTC($DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles'])
+			),
+			"video_jamions" => array(
+				"qte" 			=> $result['video_jamions'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceJamionImage'],
+				"totalHT" 		=> $DataPrices['autres']['priceJamionImage']*$result['video_jamions'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceJamionImage']*$result['video_jamions'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceJamionImage']*$result['video_jamions'])
 			),
 			"JamMobile" => array(
 				"qte" 			=> 1,
 				"prixUnitaire" 	=> $DataPrices['JamMobile'][ $infos['nbrJours'] ],
 				"totalHT" 		=> $DataPrices['JamMobile'][ $infos['nbrJours'] ],
 				"TVA" 			=> TVA( $DataPrices['JamMobile'][ $infos['nbrJours'] ] ),
-				"TotalTTC" 		=> $DataPrices['JamMobile'][ $infos['nbrJours'] ] + TVA( $DataPrices['JamMobile'][ $infos['nbrJours'] ] )	
+				"TotalTTC" 		=> HTTC($DataPrices['JamMobile'][ $infos['nbrJours'] ]) 
+			),
+			"video_techniciens" => array(
+				"qte" 			=> $result['video_techniciens'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceTechnicienImage'],
+				"totalHT" 		=> $DataPrices['autres']['priceTechnicienImage']*$result['video_techniciens']*$infos['nbrJoursPlus2'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceTechnicienImage']*$result['video_techniciens']*$infos['nbrJoursPlus2'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceTechnicienImage']*$result['video_techniciens']*$infos['nbrJoursPlus2'])
+			),
+			"video_hebergement" => array(
+				"qte" 			=> $result['video_hebergement'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceHebergementImage'],
+				"totalHT" 		=> $DataPrices['autres']['priceHebergementImage']*$result['video_hebergement']*$infos['nbrJoursPlus2'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceHebergementImage']*$result['video_hebergement']*$infos['nbrJoursPlus2'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceHebergementImage']*$result['video_hebergement']*$infos['nbrJoursPlus2'])
+			),
+
+			"video_transport" => array(
+				"qte" 			=> $result['video_transport'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementImage']*$infos['distance'],
+				"totalHT" 		=> $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'])
 			),
 
 			/////////////////////////////////////////////// SONORISATION /////////////////////////////////////////////////////////
@@ -252,23 +296,50 @@
 				"prixUnitaire" 	=> $DataPrices['son'][ $result['son'] ],
 				"totalHT" 		=> $DataPrices['son'][ $result['son'] ] * $result['nbrBoucles'],
 				"TVA" 			=> TVA( $DataPrices['son'][ $result['son'] ] * $result['nbrBoucles'] ),
-				"TotalTTC" 		=> ($DataPrices['son'][ $result['son'] ] * $result['nbrBoucles']) + TVA( $DataPrices['son'][ $result['son'] ] * $result['nbrBoucles'] )	
+				"TotalTTC" 		=> HTTC($DataPrices['son'][ $result['son'] ] * $result['nbrBoucles']) 
+			),
+			"sonorisation_unite" => array(
+				"qte" 			=> $result['sonorisation_unite'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceVehiculeSon'],
+				"totalHT" 		=> $DataPrices['autres']['priceVehiculeSon']*$result['sonorisation_unite'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceVehiculeSon']*$result['sonorisation_unite'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceVehiculeSon']*$result['sonorisation_unite'])
 			),
 			"JamSon" => array(
 				"qte" 			=> 1,
 				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
 				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
 				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ] ),
-				"TotalTTC" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ] + TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ] )	
+				"TotalTTC" 		=> HTTC($DataPrices['JamSon'][ $infos['nbrJours'] ])
 			), 
-
+			"sonorisation_techniciens" => array(
+				"qte" 			=> $result['sonorisation_techniciens'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceTechnicienSon'],
+				"totalHT" 		=> $DataPrices['autres']['priceTechnicienSon']*$result['sonorisation_techniciens']*$infos['nbrJoursPlus2'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceTechnicienSon']*$result['sonorisation_techniciens']*$infos['nbrJoursPlus2'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceTechnicienSon']*$result['sonorisation_techniciens']*$infos['nbrJoursPlus2'])
+			),
+			"sonorisation_hebergement" => array(
+				"qte" 			=> $result['sonorisation_hebergement'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceHebergementSon'],
+				"totalHT" 		=> $DataPrices['autres']['priceHebergementSon']*$result['sonorisation_hebergement']*$infos['nbrJoursPlus2'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceHebergementSon']*$result['sonorisation_hebergement']*$infos['nbrJoursPlus2'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceHebergementSon']*$result['sonorisation_hebergement']*$infos['nbrJoursPlus2'])
+			),
+			"sonorisation_transport" => array(
+				"qte" 			=> $result['sonorisation_transport'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementSon']*$infos['distance'],
+				"totalHT" 		=> $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'])
+			), 
 			/////////////////////////////////////////////// Demarches administratives /////////////////////////////////////////////////////////
 			"GestDemarAdmin" => array(
 				"qte" 			=> ($GestDemarAdmin > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $GestDemarAdmin,
 				"totalHT" 		=> $GestDemarAdmin,
 				"TVA" 			=> TVA( $GestDemarAdmin ),
-				"TotalTTC" 		=> $GestDemarAdmin + TVA( $GestDemarAdmin )	
+				"TotalTTC" 		=> HTTC($GestDemarAdmin)	
 			),
 
 			/////////////////////////////////////////////// options  /////////////////////////////////////////////////////////
@@ -277,47 +348,58 @@
 				"prixUnitaire" 	=> $captationVideo,
 				"totalHT" 		=> $captationVideo,
 				"TVA" 			=> TVA( $captationVideo ),
-				"TotalTTC" 		=> $captationVideo + TVA( $captationVideo )	
+				"TotalTTC" 		=> HTTC($captationVideo)
 			),
 			"liveVideo" => array(
 				"qte" 			=> ($liveVideo > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $liveVideo,
 				"totalHT" 		=> $liveVideo,
 				"TVA" 			=> TVA( $liveVideo ),
-				"TotalTTC" 		=> $liveVideo + TVA( $liveVideo )	
+				"TotalTTC" 		=> HTTC($liveVideo)
 			),
 			"affiche" => array(
 				"qte" 			=> ($affiche > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $affiche,
 				"totalHT" 		=> $affiche,
 				"TVA" 			=> TVA( $affiche ),
-				"TotalTTC" 		=> $affiche + TVA( $affiche )	
+				"TotalTTC" 		=> HTTC($affiche) 
 			),
 			"siteWeb" => array(
 				"qte" 			=> ($siteWeb > 0) ? 1 : 0,
 				"prixUnitaire" 	=> $siteWeb,
 				"totalHT" 		=> $siteWeb,
 				"TVA" 			=> TVA( $siteWeb ),
-				"TotalTTC" 		=> $siteWeb + TVA( $siteWeb )	
-			)
+				"TotalTTC" 		=> HTTC($siteWeb )
+			),
+			/////////////////////////////////////////////// Autres /////////////////////////////////////////////////////////
+			"sonorisation_taxe_sacem" => array(
+				"qte" 			=> "" ,
+				"prixUnitaire" 	=> "",
+				"totalHT" 		=> "",
+				"TVA" 			=> "",
+				"TotalTTC" 		=> "",
+			), 
+			"autre_gardinnage" => array(
+				"qte" 			=> $result['autre_gardinnage']*$infos['nbrJoursPlus2'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceGardiennage'],
+				"totalHT" 		=> $DataPrices['autres']['priceGardiennage']*$result['autre_gardinnage']*$infos['nbrJoursPlus2'],
+				"TVA" 			=> TVA( $DataPrices['autres']['priceGardiennage']*$result['autre_gardinnage']*$infos['nbrJoursPlus2']),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceGardiennage']*$result['autre_gardinnage']*$infos['nbrJoursPlus2'])
+			),
+
 		);
 
 		$subTotal = array(
 			"videoMapimg" => array(
-				"HT"  => $DataCalcule['visuel']['totalHT'] + $DataCalcule['JamMobile']['totalHT'] ,
-				"TVA" => $DataCalcule['visuel']['TVA'] + $DataCalcule['JamMobile']['TVA'],
-				"TTC" => $DataCalcule['visuel']['TotalTTC'] + $DataCalcule['JamMobile']['TotalTTC']
+				"HT"  => $DataCalcule['visuel']['totalHT'] + $DataCalcule['video_jamions']['totalHT'] + $DataCalcule['JamMobile']['totalHT'] + $DataCalcule['video_techniciens']['totalHT'] + $DataCalcule['video_hebergement']['totalHT'] + $DataCalcule['video_transport']['totalHT'] ,
+				"TVA" => $DataCalcule['visuel']['TVA'] + $DataCalcule['video_jamions']['TVA'] + $DataCalcule['JamMobile']['TVA'] + $DataCalcule['video_techniciens']['TVA'] + $DataCalcule['video_hebergement']['TVA'] + $DataCalcule['video_transport']['TVA'],
+				"TTC" => $DataCalcule['visuel']['TotalTTC'] + $DataCalcule['video_jamions']['TotalTTC'] + $DataCalcule['JamMobile']['TotalTTC'] + $DataCalcule['video_techniciens']['TotalTTC'] + $DataCalcule['video_hebergement']['TotalTTC'] + $DataCalcule['video_transport']['TotalTTC']
 			),
 			"sonorisation" => array(
-				"HT"  => $DataCalcule['son']['totalHT'] + $DataCalcule['JamSon']['totalHT'] ,
-				"TVA" => $DataCalcule['son']['TVA'] + $DataCalcule['JamSon']['TVA'],
-				"TTC" => $DataCalcule['son']['TotalTTC'] + $DataCalcule['JamSon']['TotalTTC']
-			), 
-			"transpHeberg" => array(
-				"HT"  => $DataCalcule['transpHeberg']['totalHT'] ,
-				"TVA" => $DataCalcule['transpHeberg']['TVA'],
-				"TTC" => $DataCalcule['transpHeberg']['TotalTTC']
-			), 
+				"HT"  => $DataCalcule['son']['totalHT'] + $DataCalcule['sonorisation_unite']['totalHT'] + $DataCalcule['JamSon']['totalHT'] + $DataCalcule['sonorisation_techniciens']['totalHT'] + $DataCalcule['sonorisation_hebergement']['totalHT'] + $DataCalcule['sonorisation_transport']['totalHT'],
+				"TVA" => $DataCalcule['son']['TVA'] + $DataCalcule['sonorisation_unite']['TVA'] + $DataCalcule['JamSon']['TVA'] + $DataCalcule['sonorisation_hebergement']['TVA'] + $DataCalcule['sonorisation_transport']['TVA'],
+				"TTC" => $DataCalcule['son']['TotalTTC'] + $DataCalcule['sonorisation_unite']['TotalTTC'] + $DataCalcule['JamSon']['TotalTTC'] + $DataCalcule['sonorisation_hebergement']['TotalTTC'] + $DataCalcule['sonorisation_transport']['TotalTTC']
+			),  
 			"GestDemarAdmin" => array(
 				"HT"  => $DataCalcule['GestDemarAdmin']['totalHT'] ,
 				"TVA" => $DataCalcule['GestDemarAdmin']['TVA'],
@@ -327,17 +409,60 @@
 				"HT"  => $DataCalcule['captationVideo']['totalHT'] + $DataCalcule['liveVideo']['totalHT'] + $DataCalcule['affiche']['totalHT'] + $DataCalcule['siteWeb']['totalHT'] ,
 				"TVA" => $DataCalcule['captationVideo']['TVA'] + $DataCalcule['liveVideo']['TVA'] + $DataCalcule['affiche']['TVA'] + $DataCalcule['siteWeb']['TVA'],
 				"TTC" => $DataCalcule['captationVideo']['TotalTTC'] + $DataCalcule['liveVideo']['TotalTTC'] + $DataCalcule['affiche']['TotalTTC'] + $DataCalcule['siteWeb']['TotalTTC']
+			),
+			"autres" => array(
+				"HT"  => $DataCalcule['autre_gardinnage']['totalHT'],
+				"TVA" => $DataCalcule['autre_gardinnage']['TVA'],
+				"TTC" => $DataCalcule['autre_gardinnage']['TotalTTC']
 			)
 		);
 		$Total = array();
 		$Total["HT"] = $subTotal['videoMapimg']['HT'] + $subTotal['sonorisation']['HT'] + $subTotal['transpHeberg']['HT'] + $subTotal['GestDemarAdmin']['HT'] + $subTotal['options']['HT'];
 
+		if( $result['sonorisation_taxe_sacem'] > 0  ){
+
+			$DataCalcule['sonorisation_taxe_sacem'] = array(
+				"qte" 			=> $DataPrices['autres']['taxeSacem'] ,
+				"prixUnitaire" 	=> TAXE($Total["HT"], $DataPrices['autres']['taxeSacem']),
+				"totalHT" 		=> TAXE($Total["HT"], $DataPrices['autres']['taxeSacem']),
+				"TVA" 			=> TVA( TAXE($Total["HT"], $DataPrices['autres']['taxeSacem']) ),
+				"TotalTTC" 		=> HTTC(TAXE($Total["HT"], $DataPrices['autres']['taxeSacem'])),
+			);
+
+			$subTotal['autres']['HT']  += $DataCalcule['sonorisation_taxe_sacem']['totalHT'];
+			$subTotal['autres']['TVA'] += $DataCalcule['sonorisation_taxe_sacem']['TVA'];
+			$subTotal['autres']['TTC'] += $DataCalcule['sonorisation_taxe_sacem']['TotalTTC'];
+
+		}
+
+		$Total["HT"] += $subTotal['autres']['HT'];
+
 		$nbrJourFromNow = datediff(time(),$result['dateDebut']);
 		if( $nbrJourFromNow >= (30*6) ){
             $Total['HT'] = $Total['HT'] - ($Total['HT'] * 10) / 100;
         }
-        $Total['TVA'] = TVA( $Total['HT'] );
-        $Total['TTC'] =  $Total['HT'] + $Total['TVA'];
+
+        $remise = false;
+        $Total['HTR'] = $Total['HT'];
+        if( $result['remise_montant'] > 0 ){
+        	$Total['HTR'] = $Total['HTR'] - $result['remise_montant'];
+        	$remise = array(
+        		'label' => $result['remise_label'],
+        		'value' => number_format($result['remise_montant'],2,',',' ' ).' €'
+        	);
+        }
+        if( $result['remise_pourcentage'] > 0 ){
+        	$Total['HTR'] = $Total['HTR'] - TAXE($Total['HTR'], $result['remise_pourcentage'] ); 
+        	$remise = array(
+        		'label' => $result['remise_label'],
+        		'value' => $result['remise_pourcentage'].'%'
+        	);
+        }
+
+
+
+        $Total['TVA'] = TVA( $Total['HTR'] );
+        $Total['TTC'] = HTTC( $Total['HTR'] );
 
 
  	
@@ -348,7 +473,8 @@
 			"infos" 		=> $infos,
 			"DataCalcule"	=> $DataCalcule,
 			"subTotal"		=> $subTotal,
-			"Total"			=> $Total 
+			"Total"			=> $Total,
+			"remise"		=> $remise
 		);
   
 

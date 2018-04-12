@@ -285,24 +285,25 @@
                 });
 
 
+                nbrJour += 2;
 
                 // Video Mapping
                     // Jamions
                     totalDevis += GlobalData.autres.priceJamionImage * data.video_maping.jamions;
 
                     // TECHNICIENS
-                    totalDevis += GlobalData.autres.priceTechnicienImage * data.video_maping.techniciens;
+                    totalDevis += GlobalData.autres.priceTechnicienImage * data.video_maping.techniciens * nbrJour;
 
                     // Hebergement
                     if( data.video_maping.hebergement ){
                         var priceHebergementImage = GlobalData.autres.priceHebergementImage; 
-                        totalDevis += (priceHebergementImage * 2) * (nbrJour + 2);
+                        totalDevis += priceHebergementImage * nbrJour;
                     }
 
                     //Transport 
                     if( data.video_maping.transport ){
                         var priceDeplacementImage = GlobalData.autres.priceDeplacementImage; 
-                        totalDevis += priceDeplacementImage * distance;
+                        totalDevis += priceDeplacementImage * distance  * nbrJour;
                     }
 
 
@@ -311,32 +312,33 @@
                     totalDevis += GlobalData.autres.priceVehiculeSon * data.sonorisation.unite;
 
                     // TECHNICIENS
-                    totalDevis += GlobalData.autres.priceTechnicienSon * data.sonorisation.techniciens;
+                    totalDevis += GlobalData.autres.priceTechnicienSon * data.sonorisation.techniciens  * nbrJour;
 
                     // Hebergement
                     if( GlobalData.son[ data.son ] > 0 && data.sonorisation.hebergement ){
                         var priceHebergementSon = GlobalData.autres.priceHebergementSon; 
-                        totalDevis += priceHebergementSon * (nbrJour + 2);
+                        totalDevis += priceHebergementSon * nbrJour;
                     }
 
                     //Transport 
                     if(  GlobalData.son[ data.son ] > 0 && data.sonorisation.transport ){
                         var priceDeplacementSon = GlobalData.autres.priceDeplacementSon; 
-                        totalDevis += priceDeplacementSon * (nbrJour + 2);
+                        totalDevis += priceDeplacementSon * distance * nbrJour;
                     }
 
+                    
+
+
+                //Autre
                     //Taxe Sacem 
                     if( data.sonorisation.taxe_sacem ){
                         var taxeSacem = GlobalData.autres.taxeSacem; 
                         totalDevis += (totalDevis * taxeSacem) / 100  ;
                     }
-
-
-                //Autre
                     // Gardinnage 
                     if( data.autres.gardinnage ){
                         var priceGardiennage = GlobalData.autres.priceGardiennage; 
-                        totalDevis += priceGardiennage * nbrJour  ;
+                        totalDevis += priceGardiennage * nbrJour;
                     }
 
                     // remise montant Eauro
@@ -361,6 +363,9 @@
                     ///////////////////////////////////
                     console.log("Finish")
                     $('[name=devis]').val( number_format(totalDevis, 2, ',',' ') )
+
+
+
                 })  
                  
 
@@ -369,6 +374,17 @@
                 
         
     } 
+
+    heightBlock1Block2 = function () {
+        $('.block-1, .block-2').css('height','auto')
+        if( $(window).width() <= 1280 && $(window).width() > 886 ){
+            var heightBlock1 = $('.block-1').height();
+            var heightBlock2 = $('.block-2').height();
+
+            $('.block-1, .block-2').css('height', (heightBlock1 > heightBlock2) ? heightBlock1 : heightBlock2 );
+        }
+            
+    }
 
     ObjectSize = function(obj) {
         var size = 0, key;
@@ -438,6 +454,7 @@
         formData.append("autre_gardinnage"        , $('#formDevis [name=autre_gardinnage]').is(':checked')*1 ); 
         formData.append("remise_montant"          , $('#formDevis [name=remise_montant]').val() ); 
         formData.append("remise_pourcentage"      , $('#formDevis [name=remise_pourcentage]').val() ); 
+        formData.append("remise_label"      , $('#formDevis [name=remise_label]').val() ); 
 
         formData.append("email"         , $('#SendDevis [name=email]').val() ); 
         formData.append("tel"           , $('#SendDevis [name=tel]').val() ); 
@@ -603,6 +620,8 @@ var interval = false;
         jcf.destroy('input[name=nbrBoucles]');
         setTimeout(function () { 
             jcf.replace('input[name=nbrBoucles]'); 
+
+            heightBlock1Block2();
         }) 
 
         
@@ -624,6 +643,8 @@ var interval = false;
 
         interval = false;
         calculate();
+
+        heightBlock1Block2();
     })
 
     $('.img-off-on').click(function (event) {
@@ -830,6 +851,10 @@ var interval = false;
             $('.filesPreview').append('<div>'+file.name+'<span data-index="'+indexObj+'" class="deleteFile">X</span></div>');
             filesInputElement[ indexObj ] = file;
         }) 
+
+        setTimeout(function () {
+            heightBlock1Block2();
+        })
     })
 
     $('.filesPreview').on('click','.deleteFile',function () { 
@@ -852,6 +877,9 @@ var interval = false;
                 $('.filesPreview').append('<div>'+file.name+'<span data-index="'+key+'" class="deleteFile">X</span></div>');
                 filesInputElement[ key ] = file;
                 key++;
+            })
+            setTimeout(function () {
+                heightBlock1Block2();
             })
         })
     })
@@ -1037,10 +1065,9 @@ var interval = false;
     $(D).ready(function($) {
         JQUERY4U.UTIL.setupFormValidation(); 
         ///////////******* Code Jquery *******//////////////
-
-
-
-
+        setTimeout(function () {
+            heightBlock1Block2(); 
+        })
         ////////////******* Fin Code  *******//////////////
     });
  

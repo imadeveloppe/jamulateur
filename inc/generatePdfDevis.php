@@ -104,7 +104,7 @@
 			</tr>
 		</table>
 
-		<table style="margin-top: 20px;margin-bottom: 20px">
+		<table style="margin-top: 5px;margin-bottom: 5px">
 			<tr>
 				<td>
 					<table class="infoDevis">
@@ -231,13 +231,13 @@
 			</tr>
 		</table>
 
-		<p style="text-align: right; padding: 10px;background:#f3f3f3;">
+		<p style="text-align: right; padding: 5px;background:#f3f3f3;">
 			Ce devis sera validé après inspection du site par les équipes d'ATHEM & SKERTZO	<br> 
 			La protection des publics, des biens et du matériel de projection sont à la charge du client<br>	 
 			Ce devis n'intègre pas les droits d'utilisation des contenus devant être acquis auprès de tiers
 		</p>
 
-		<table style="margin-top: 30px;" class="detailDevis" cellpadding="0" cellspacing="0">
+		<table style="margin-top: 10px;" class="detailDevis" cellpadding="0" cellspacing="0">
 			<tr>
 				<th>Description</th>
 				<th>Quantités</th> 
@@ -247,186 +247,102 @@
 				<th align="center">TVA %</th> 
 				<th align="right">TVA</th> 
 				<th align="right">TOTAL TTC</th> 
-			</tr>
+			</tr> 
+			<?php if( $subTotal['videoMapimg']['HT'] > 0 ): ?>
+				<tr class="subTotal">
+					<td>
+						VIDÉO MAPPING
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['videoMapimg']['HT'],2,',',' ' ) ?> €</td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['videoMapimg']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($subTotal['videoMapimg']['TTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
 
-			<tr class="subTotal">
-				<td>
-					VIDÉO MAPPING
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right"><?= number_format($subTotal['videoMapimg']['HT'],2,',',' ' ) ?> €</td>
-				<td></td>
-				<td align="right"><?= number_format($subTotal['videoMapimg']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($subTotal['videoMapimg']['TTC'],2,',',' ' ) ?> €</td>
-			</tr>
-			<tr>
-				<td>Bibliothèque de contenus prêts à jammer</td>
-				<td align="right"><?= $DataCalcule['visuel']['qte'] ?></td>
-				<td>Minutes</td>
-				<td align="right"><?= number_format($DataCalcule['visuel']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['visuel']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['visuel']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['visuel']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
+			<?php if( $DataCalcule['visuel']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Bibliothèque de contenus prêts à jammer</td>
+					<td align="right"><?= $DataCalcule['visuel']['qte'] ?></td>
+					<td>Minutes</td>
+					<td align="right"><?= number_format($DataCalcule['visuel']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['visuel']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['visuel']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['visuel']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
 	
+			
+			<?php if( $DataCalcule['video_jamions']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Prix d’installation des jamions</td>
+					<td align="right"><?= $DataCalcule['video_jamions']['qte'] ?></td>
+					<td></td>
+					<td align="right"><?= number_format($DataCalcule['video_jamions']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_jamions']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['video_jamions']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_jamions']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+			
 
-			<tr>
-				<td>Prix d’installation pour les x jamions</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr> 
+			<?php if( $DataCalcule['JamMobile']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Prix de mise à disposition des unités de production</td>
+					<td align="right"><?= $DataCalcule['JamMobile']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['JamMobile']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['JamMobile']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['JamMobile']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['JamMobile']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+			
 
-			<tr>
-				<td>Location materiel + mise a disposition techniciens + transport</td>
-				<td align="right"><?= $DataCalcule['JamMobile']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['JamMobile']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['JamMobile']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['JamMobile']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['JamMobile']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
-
-			<tr>
-				<td>Rémunération des techniciens de vidéo mapping</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-			<tr>
-				<td>Hébergement des techniciens de vidéo mapping</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-			<tr>
-				<td>Transport des techniciens de vidéo mapping</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-
-
-
-
-
-
-
-
-
-			<tr class="subTotal">
-				<td>
-					SONORISATION
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right"><?= number_format($subTotal['sonorisation']['HT'],2,',',' ' ) ?> €</td>
-				<td></td>
-				<td align="right"><?= number_format($subTotal['sonorisation']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($subTotal['sonorisation']['TTC'],2,',',' ' ) ?> €</td>
-			</tr>
-			<tr>
-				<td>Son éxistant</td>
-				<td align="right"><?= $DataCalcule['son']['qte'] ?></td>
-				<td>Minutes</td>
-				<td align="right"><?= number_format($DataCalcule['son']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['son']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['son']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['son']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
-
-
-			<tr>
-				<td>Prix d’installation pour les x unités de son</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-
-			<tr>
-				<td>Location materiel + mise a disposition techniciens + transport</td>
-				<td align="right"><?= $DataCalcule['JamSon']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['JamSon']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['JamSon']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['JamSon']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['JamSon']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr> 
-
-			<tr>
-				<td>Rémunération des techniciens de son</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-			<tr>
-				<td>Hébergement des techniciens de son</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-			<tr>
-				<td>Transport des techniciens de son</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
-
-			<tr>
-				<td>Taxe sacem</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
+			<?php if( $DataCalcule['video_techniciens']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Rémunération des techniciens de vidéo mapping</td>
+					<td align="right"><?= $DataCalcule['video_techniciens']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['video_techniciens']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_techniciens']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['video_techniciens']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_techniciens']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+			
+			<?php if( $DataCalcule['video_hebergement']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Hébergement des techniciens de vidéo mapping</td>
+					<td align="right"><?= $DataCalcule['video_hebergement']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['video_hebergement']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_hebergement']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['video_hebergement']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_hebergement']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+			
+			<?php if( $DataCalcule['video_transport']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Transport des équipes</td>
+					<td align="right"><?= $DataCalcule['video_transport']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['video_transport']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_transport']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['video_transport']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['video_transport']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
 
 
 
@@ -434,32 +350,141 @@
 
 
 
-			<tr class="subTotal">
-				<td>
-					DEMARCHES ADMINISTRATIVES
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['totalHT'],2,',',' ' ) ?> €</td>
-				<td></td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr> 
-			<tr>
-				<td>Gestion des demarches administratives</td>
-				<td align="right"><?= $DataCalcule['GestDemarAdmin']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
+
+
+			
+			<?php if( $subTotal['sonorisation']['HT'] > 0 ): ?>
+				<tr class="subTotal">
+					<td>
+						SONORISATION
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['sonorisation']['HT'],2,',',' ' ) ?> €</td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['sonorisation']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($subTotal['sonorisation']['TTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+			<?php if( $DataCalcule['son']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Son éxistant</td>
+					<td align="right"><?= $DataCalcule['son']['qte'] ?></td>
+					<td>Minutes</td>
+					<td align="right"><?= number_format($DataCalcule['son']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['son']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['son']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['son']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+
+			
+			<?php if( $DataCalcule['sonorisation_unite']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Prix d’installation des unités de son</td>
+					<td align="right"><?= $DataCalcule['sonorisation_unite']['qte'] ?></td>
+					<td></td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+			
+			<?php if( $DataCalcule['JamSon']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Prix de  mise à disposition des unités de production</td>
+					<td align="right"><?= $DataCalcule['JamSon']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['JamSon']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['JamSon']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['JamSon']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['JamSon']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+			
+			<?php if( $DataCalcule['sonorisation_techniciens']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Rémunération des techniciens de son</td>
+					<td align="right"><?= $DataCalcule['sonorisation_techniciens']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_techniciens']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_techniciens']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_techniciens']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_techniciens']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+			
+			<?php if( $DataCalcule['sonorisation_hebergement']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Hébergement des techniciens de son</td>
+					<td align="right"><?= $DataCalcule['sonorisation_hebergement']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_hebergement']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_hebergement']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_hebergement']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_hebergement']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?> 
+			
+			<?php if( $DataCalcule['sonorisation_transport']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Transport des équipes</td>
+					<td align="right"><?= $DataCalcule['sonorisation_transport']['qte'] ?> x <?= $infos['nbrJoursPlus2'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_transport']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_transport']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_transport']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_transport']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
 
 
 
 
+
+			
+			<?php if( $DataCalcule['GestDemarAdmin']['totalHT'] > 0 ): ?>
+				<tr class="subTotal">
+					<td>
+						DEMARCHES ADMINISTRATIVES
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['totalHT'],2,',',' ' ) ?> €</td>
+					<td></td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+
+			<?php if( $DataCalcule['GestDemarAdmin']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Gestion des demarches administratives</td>
+					<td align="right"><?= ($DataCalcule['GestDemarAdmin']['qte'] > 0) ? $infos['nbrJours'] : 0 ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+
+
+			
+			<?php if( $subTotal['options']['HT'] > 0 ): ?>
 			<tr class="subTotal">
 				<td>
 					OPTIONS
@@ -472,70 +497,103 @@
 				<td align="right"><?= number_format($subTotal['options']['TVA'],2,',',' ' ) ?> €</td>
 				<td align="right"><?= number_format($subTotal['options']['TTC'],2,',',' ' ) ?> €</td>
 			</tr> 
-			<tr>
-				<td>Réalisation d'une video de l´evenement</td>
-				<td align="right"><?= $DataCalcule['captationVideo']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['captationVideo']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['captationVideo']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['captationVideo']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['captationVideo']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
-			<tr>
-				<td>Diffusion en LIVE de l'événement sur votre site web et/ou vos réseaux sociaux</td>
-				<td align="right"><?= $DataCalcule['liveVideo']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['liveVideo']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['liveVideo']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['liveVideo']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['liveVideo']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
-			<tr>
-				<td>Réalisation d'une affiche pour annoncer l'événement</td>
-				<td align="right"><?= $DataCalcule['affiche']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['affiche']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['affiche']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['affiche']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['affiche']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>
-			<tr>
-				<td>Réalisation d'un site Internet dédié au projet	 </td>
-				<td align="right"><?= $DataCalcule['siteWeb']['qte'] ?></td>
-				<td>Forfait</td>
-				<td align="right"><?= number_format($DataCalcule['siteWeb']['prixUnitaire'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['siteWeb']['totalHT'],2,',',' ' ) ?> €</td>
-				<td align="center">20%</td>
-				<td align="right"><?= number_format($DataCalcule['siteWeb']['TVA'],2,',',' ' ) ?> €</td>
-				<td align="right"><?= number_format($DataCalcule['siteWeb']['TotalTTC'],2,',',' ' ) ?> €</td>
-			</tr>  
+			<?php endif ?>
 
 
-			<tr class="subTotal">
-				<td>
-					AUTRES
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr> 
-			<tr>
-				<td>Prestation de gardinnage</td>
-				<td align="right"></td>
-				<td></td>
-				<td align="right"></td>
-				<td align="right"></td>
-				<td align="center">20%</td>
-				<td align="right"></td>
-				<td align="right"></td>
-			</tr>
+			<?php if( $DataCalcule['captationVideo']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Réalisation d'une video de l´evenement</td>
+					<td align="right"><?= $DataCalcule['captationVideo']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['captationVideo']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['captationVideo']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['captationVideo']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['captationVideo']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+
+
+			<?php if( $DataCalcule['liveVideo']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Diffusion en LIVE de l'événement sur votre site web et/ou vos réseaux sociaux</td>
+					<td align="right"><?= $DataCalcule['liveVideo']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['liveVideo']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['liveVideo']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['liveVideo']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['liveVideo']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+
+			<?php if( $DataCalcule['affiche']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Réalisation d'une affiche pour annoncer l'événement</td>
+					<td align="right"><?= $DataCalcule['affiche']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['affiche']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['affiche']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['affiche']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['affiche']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+			<?php if( $DataCalcule['siteWeb']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Réalisation d'un site Internet dédié au projet	 </td>
+					<td align="right"><?= $DataCalcule['siteWeb']['qte'] ?></td>
+					<td>Forfait</td>
+					<td align="right"><?= number_format($DataCalcule['siteWeb']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['siteWeb']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['siteWeb']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['siteWeb']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>  
+			<?php endif ?>
+
+			
+			<?php if( $subTotal['autres']['HT'] > 0 ): ?>
+				<tr class="subTotal">
+					<td>
+						AUTRES
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['autres']['HT'],2,',',' ' ) ?> €</td>
+					<td></td>
+					<td align="right"><?= number_format($subTotal['autres']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($subTotal['autres']['TTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
+			<?php if( $DataCalcule['sonorisation_taxe_sacem']['qte'] > 0 ): ?>
+				<tr>
+					<td>Taxe sacem</td>
+					<td align="right"><?= $DataCalcule['sonorisation_taxe_sacem']['qte'] ?></td>
+					<td>%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_taxe_sacem']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_taxe_sacem']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_taxe_sacem']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['sonorisation_taxe_sacem']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr>
+			<?php endif ?>
+
+			<?php if( $DataCalcule['autre_gardinnage']['totalHT'] > 0 ): ?>
+				<tr>
+					<td>Prestation de gardiennage</td>
+					<td align="right"><?= $DataCalcule['autre_gardinnage']['qte'] ?></td>
+					<td>Jour(s)</td>
+					<td align="right"><?= number_format($DataCalcule['autre_gardinnage']['prixUnitaire'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['autre_gardinnage']['totalHT'],2,',',' ' ) ?> €</td>
+					<td align="center">20%</td>
+					<td align="right"><?= number_format($DataCalcule['autre_gardinnage']['TVA'],2,',',' ' ) ?> €</td>
+					<td align="right"><?= number_format($DataCalcule['autre_gardinnage']['TotalTTC'],2,',',' ' ) ?> €</td>
+				</tr> 
+			<?php endif ?>
 
 
 
@@ -551,6 +609,16 @@
 							<td>Total HT</td>
 							<td align="right"><?= number_format($Total['HT'],2,',',' ' ) ?> €</td>
 						</tr>
+						<?php if( $remise ): ?> 
+							<tr>
+								<td><?= empty($remise['label']) ? 'Remise' : $remise['label'] ?></td>
+								<td align="right"><?= $remise['value'] ?></td>
+							</tr>
+							<tr>
+								<td>Nouveau total HT</td>
+								<td align="right"><?= number_format($Total['HTR'],2,',',' ' ) ?> €</td>
+							</tr>
+						<?php endif ?>
 						<tr>
 							<td>TVA</td>
 							<td align="right"><?= number_format($Total['TVA'],2,',',' ' ) ?> €</td>
@@ -566,7 +634,7 @@
 
 		
 
-		<table style="margin-top: 30px;margin-bottom: 30px;">
+		<table style="margin-top: 20px;margin-bottom: 10px;">
 			<tr>
 				<td>
 					Merci vivement d'avoir sollicité notre atelier,<br>
@@ -593,7 +661,7 @@
 			</tr>
 		</table>
 
-		<div class="content-privacy-policy" style="padding-top: 90px">
+		<div class="content-privacy-policy" style="padding-top: 20px">
 			  <?= getConditionsGenerales() ?>
 		</div>
 

@@ -39,6 +39,7 @@ if(isset($_POST)):
 	 	`autre_gardinnage`, 
 	 	`remise_montant`, 
 	 	`remise_pourcentage`, 
+	 	`remise_label`, 
 
 	 	`email`, 
 	 	`tel`, 
@@ -80,6 +81,7 @@ if(isset($_POST)):
 	 	'$autre_gardinnage', 
 	 	'$remise_montant', 
 	 	'$remise_pourcentage', 
+	 	'$remise_label', 
 	 	
 	 	'$email', 
 	 	'$tel', 

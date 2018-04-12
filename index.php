@@ -333,34 +333,36 @@
 				
 				<div class="item-1-1">
 	 				<h2 class="customLabel">Vidéo mapping</h2>
+
+	 				<?php   
+						$query = $db->query("SELECT * FROM autres");
+						$autres = $query->fetchAll();
+					?> 
 	 				<div class="table">
 	 					<div>
 	 						<div>
 	 							<div class="table">
 				 					<div>
 				 						<div>
-				 							<label class="subtitle"># JAMIONS</label>
+				 							<label class="subtitle">Nb. de jamions</label>
 				 						</div>
 				 						<div class="selectContainer">
-				 							<select name="video_jamions">
-					 							<option value="1">1</option>   
-					 							<option value="2">2</option>   
-					 							<option value="3">3</option>   
+				 							<select name="video_jamions"> 
+				 								<?php for ($i=1; $i <= $autres[12][2] ; $i++): ?>
+					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 							<?php endfor; ?> 
 					 						</select>
 				 						</div>
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label class="subtitle"># TECHNICIENS</label>
+				 							<label class="subtitle">Nb de techniciens</label>
 				 						</div>
 				 						<div class="selectContainer">
 				 							<select name="video_techniciens">
-					 							<option value="1">1</option>   
-					 							<option value="2">2</option>   
-					 							<option value="3">3</option>    
-					 							<option value="4">4</option>    
-					 							<option value="5">5</option>    
-					 							<option value="6">6</option>    
+					 							<?php for ($i=1; $i <= $autres[10][2] ; $i++): ?>
+					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 							<?php endfor; ?>    
 					 						</select>
 				 						</div>
 				 					</div>
@@ -370,17 +372,17 @@
 	 							<div class="table">
 				 					<div> 
 				 						<div>
-				 							<label for="video_hebergement" class="subtitle">HEBERGEMENT EQUIPE</label>
+				 							<label for="video_hebergement" class="subtitle">Hébergement techniciens</label>
 				 						</div>
-				 						<div>
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="video_hebergement" name="video_hebergement">
 				 						</div>
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label for="video_transport" class="subtitle">TRANSPORT</label>
+				 							<label for="video_transport" class="subtitle">Transport de l’équipe</label>
 				 						</div>
-				 						<div>
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="video_transport" name="video_transport">
 				 						</div>
 				 					</div>
@@ -396,28 +398,25 @@
 	 							<div class="table">
 				 					<div>
 				 						<div>
-				 							<label class="subtitle"># UNITES SON</label>
+				 							<label class="subtitle">Nb. d’unités de son</label>
 				 						</div>
 				 						<div class="selectContainer">
 				 							<select name="sonorisation_unite">
-					 							<option value="1">1</option>   
-					 							<option value="2">2</option>   
-					 							<option value="3">3</option> 
+					 							<?php for ($i=1; $i <= $autres[13][2] ; $i++): ?>
+					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 							<?php endfor; ?>    
 					 						</select>
 				 						</div>
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label class="subtitle"># TECHNICIENS</label>
+				 							<label class="subtitle">Nb de techniciens</label>
 				 						</div>
 				 						<div class="selectContainer">
 				 							<select name="sonorisation_techniciens">
-					 							<option value="1">1</option>   
-					 							<option value="2">2</option>   
-					 							<option value="3">3</option>    
-					 							<option value="4">4</option>    
-					 							<option value="5">5</option>    
-					 							<option value="6">6</option>       
+					 							<?php for ($i=1; $i <= $autres[11][2] ; $i++): ?>
+					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 							<?php endfor; ?>           
 					 						</select>
 				 						</div>
 				 					</div>
@@ -427,17 +426,17 @@
 	 							<div class="table">
 				 					<div> 
 				 						<div>
-				 							<label for="sonorisation_hebergement" class="subtitle">HEBERGEMENT EQUIPE</label>
+				 							<label for="sonorisation_hebergement" class="subtitle">Hébergement techniciens</label>
 				 						</div>
-				 						<div>
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="sonorisation_hebergement" name="sonorisation_hebergement">
 				 						</div>
 				 					</div>
 				 					<div>
 				 						<div>
-				 							<label for="sonorisation_transport" class="subtitle">TRANSPORT</label>
+				 							<label for="sonorisation_transport" class="subtitle">Transport de l’équipe</label>
 				 						</div>
-				 						<div>
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="sonorisation_transport" name="sonorisation_transport">
 				 						</div>
 				 					</div>
@@ -445,7 +444,7 @@
 				 						<div>
 				 							<label for="sonorisation_taxe_sacem" class="subtitle">TAXE SACEM</label>
 				 						</div>
-				 						<div>
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="sonorisation_taxe_sacem" name="sonorisation_taxe_sacem">
 				 						</div>
 				 					</div>
@@ -461,9 +460,9 @@
 	 							<div class="table">
 				 					<div>
 				 						<div>
-				 							<label for="autre_gardinnage" class="subtitle">PRESTATION DE GARDINNAGE</label>
+				 							<label for="autre_gardinnage" class="subtitle">Prestation de gardiennage</label>
 				 						</div>
-				 						<div style="width: 20px">
+				 						<div class="selectChekbox">
 				 							<input type="checkbox" id="autre_gardinnage" name="autre_gardinnage">
 				 						</div>
 				 					</div> 
@@ -483,6 +482,9 @@
 				 							<input type="text" name="remise_pourcentage" placeholder="%">
 				 						</div>
 				 					</div> 
+				 				</div>
+				 				<div>
+				 					<input type="text" name="remise_label" placeholder="Libellé de la remise">
 				 				</div>
 	 						</div> 
 	 					</div>
@@ -686,7 +688,8 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.fr.js"></script>   
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyCUBPErUcahZbvPkAqtZ2w4Ny7u_QV3x5c&language=fr"></script>  
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyBeQzg0JQbYmapoySNogo2YMjE10qS8xBo&language=fr"></script>  
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyD9qWb51Zg3oUowbJHGox-VCWu4C5zDOzs&language=fr"></script>  -->
 
 <script type="text/javascript" src="js/script.js"></script> 
 <script type="text/javascript"> 
