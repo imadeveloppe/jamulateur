@@ -1068,6 +1068,9 @@ var interval = false;
         setTimeout(function () {
             heightBlock1Block2(); 
         })
+        $(window).resize(function () {
+            heightBlock1Block2(); 
+        })
         ////////////******* Fin Code  *******//////////////
     });
  

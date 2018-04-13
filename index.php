@@ -29,7 +29,7 @@
 	 	</a>
 	 </div>
 	 <form class="blocks-content" id="formDevis" enctype="multipart/form-data">
-	 	 
+	 	<div class="clear"></div>
 	 	<div class="block block-1">
 	 		<div class="head">
 	 			événement
@@ -529,9 +529,9 @@
 	 			</div>
 
 	 		</div>
-	 	</div> 
-	 	
+	 	</div>  
 	 	<input type="hidden" name="depotAddress" value="<?= getDepotAddress() ?>">
+	 	<div class="clear"></div>
 	 </form>
 </div>
 

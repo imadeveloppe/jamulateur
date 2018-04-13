@@ -487,6 +487,45 @@
 		
 
 		$mail = new PHPMailer;
+		$mail->isSMTP();
+
+		// Zento
+		// Enable SMTP debugging
+		// 0 = off (for production use)
+		// 1 = client messages
+		// 2 = client and server messages
+		// $mail->SMTPDebug = 2;
+		// //Set the hostname of the mail server
+		// $mail->Host = 'auth.smtp.1and1.fr';
+		// //Set the SMTP port number - likely to be 25, 465 or 587
+		// $mail->Port = 465;
+		// //Whether to use SMTP authentication
+		// $mail->SMTPAuth = true;
+		// $mail->SMTPSecure = 'ssl'; 
+		// //Username to use for SMTP authentication
+		// $mail->Username = 'noreply-athem@zento.fr';
+		// //Password to use for SMTP authentication
+		// $mail->Password = 'Xwo@6973nas'; 
+
+
+		//GMAIL
+		$mail->SMTPDebug = 2;	
+		//Set the hostname of the mail server
+		$mail->Host = 'smtp.gmail.com';
+		// use
+		// $mail->Host = gethostbyname('smtp.gmail.com');
+		// if your network does not support SMTP over IPv6
+		//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+		$mail->Port = 587;
+		//Set the encryption system to use - ssl (deprecated) or tls
+		$mail->SMTPSecure = 'tls';
+		//Whether to use SMTP authentication
+		$mail->SMTPAuth = true;
+		//Username to use for SMTP authentication - use full email address for gmail
+		$mail->Username = "athem.zento@gmail.com";
+		//Password to use for SMTP authentication
+		$mail->Password = "Xwo@6973nas";
+
 		$mail->setFrom( getContactInfo()['email'], 'ATHEM & SKERTZÒ');
 		$mail->addAddress( $infos['email'] );
 		$mail->addCC( getContactInfo()['email'] );

@@ -1,5 +1,8 @@
-<?php  require 'functions.php'; 
- 
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require 'functions.php'; 
 if(isset($_POST)):
 	extract($_POST); 
 
@@ -114,6 +117,10 @@ if(isset($_POST)):
 		include '../libraries/PHPMailer/PHPMailerAutoload.php';
 		// if( sendEmailToCLient( array("email"=>$infos['email'], "addAttachment"=> $infos['addAttachment']) )  &&  sendEmailToAdmin( array("addAttachment"=> $infos['addAttachment'] ) ) ){
 		if( sendEmailToCLient( array("email"=>$infos['email'], "addAttachment"=> $infos['addAttachment']) )  ){
+			if(file_exists($infos['addAttachment'])){
+				unlink($infos['addAttachment']);
+			}
+		}else{
 			if(file_exists($infos['addAttachment'])){
 				unlink($infos['addAttachment']);
 			}
