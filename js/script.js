@@ -264,8 +264,8 @@
 
                 ///Required Price
                 if( nbrJour <= 90 ){
-                    totalDevis += GlobalData.JamMobile[ nbrJour ]; 
-                    totalDevis += GlobalData.JamSon[ nbrJour ]; 
+                    totalDevis += GlobalData.JamMobile[ nbrJour ] * data.video_maping.jamions; 
+                    totalDevis += GlobalData.JamSon[ nbrJour ] * data.sonorisation.unite; 
                 }else{
                     totalDevis += GlobalData.JamMobile[ 90 ]; 
                     totalDevis += GlobalData.JamSon[ 90 ]; 
@@ -303,7 +303,7 @@
                     //Transport 
                     if( data.video_maping.transport ){
                         var priceDeplacementImage = GlobalData.autres.priceDeplacementImage; 
-                        totalDevis += priceDeplacementImage * distance  * nbrJour;
+                        totalDevis += priceDeplacementImage * distance  * 2;
                     }
 
 
@@ -323,7 +323,7 @@
                     //Transport 
                     if(  GlobalData.son[ data.son ] > 0 && data.sonorisation.transport ){
                         var priceDeplacementSon = GlobalData.autres.priceDeplacementSon; 
-                        totalDevis += priceDeplacementSon * distance * nbrJour;
+                        totalDevis += priceDeplacementSon * distance * 2;
                     }
 
                     
@@ -642,7 +642,35 @@ var interval = false;
         $('p.son-ml').removeClass('active').parent().find('.'+dataIndex).addClass('active');
 
         interval = false;
-        calculate();
+
+        if( dataIndex =='pasDeSon' ){
+            $('[name=sonorisation_unite]').val(0).attr('disabled','disabled')
+            $('[name=sonorisation_techniciens]').val(0).attr('disabled','disabled')
+            $('[name=sonorisation_hebergement]').prop('checked', false).attr('disabled','disabled')
+            $('[name=sonorisation_transport]').prop('checked', false).attr('disabled','disabled');
+        }else{
+            $('[name=sonorisation_unite]').val(1)
+            $('[name=sonorisation_techniciens]').val(1)
+
+            $('[name=sonorisation_unite]').removeAttr('disabled')
+            $('[name=sonorisation_techniciens]').removeAttr('disabled')
+            $('[name=sonorisation_hebergement]').removeAttr('disabled')
+            $('[name=sonorisation_transport]').removeAttr('disabled');
+        }
+        jcf.destroy('[name=sonorisation_unite]');
+        jcf.destroy('[name=sonorisation_techniciens]');
+        jcf.destroy('[name=sonorisation_hebergement]');
+        jcf.destroy('[name=sonorisation_transport]');
+        setTimeout(function () { 
+            jcf.replace('[name=sonorisation_unite]');
+            jcf.replace('[name=sonorisation_techniciens]');
+            jcf.replace('[name=sonorisation_hebergement]');
+            jcf.replace('[name=sonorisation_transport]');
+        }) 
+        
+        setTimeout(function () {
+            calculate();
+        })
 
         heightBlock1Block2();
     })

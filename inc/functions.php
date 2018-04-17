@@ -202,8 +202,9 @@
 			"dateDevis"		=> getFrenchDate( $result['dateDevis'] ), 
 			"validateDate" 	=> getFrenchDate( $result['dateDevis'] + (3600 * 24 * 30) ), 
 
-			"options"		=> (strpos(',', $result['options']) !== false ) ? array($result['options']) : explode(',', $result['options']),
-			"contact"		=> getContactInfo()
+			"options"		=> ( !empty($result['options']) && strpos(',', $result['options']) !== false ) ? array($result['options']) : explode(',', $result['options']),
+			"contact"		=> getContactInfo(),
+			"lieu"			=> $result['lieu']
 
 		);
 		$DataPrices = getDataPrices(); 
@@ -262,10 +263,10 @@
 			),
 			"JamMobile" => array(
 				"qte" 			=> 1,
-				"prixUnitaire" 	=> $DataPrices['JamMobile'][ $infos['nbrJours'] ],
-				"totalHT" 		=> $DataPrices['JamMobile'][ $infos['nbrJours'] ],
-				"TVA" 			=> TVA( $DataPrices['JamMobile'][ $infos['nbrJours'] ] ),
-				"TotalTTC" 		=> HTTC($DataPrices['JamMobile'][ $infos['nbrJours'] ]) 
+				"prixUnitaire" 	=> $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'],
+				"totalHT" 		=> $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'],
+				"TVA" 			=> TVA( $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'] ) 
 			),
 			"video_techniciens" => array(
 				"qte" 			=> $result['video_techniciens'],
@@ -283,11 +284,11 @@
 			),
 
 			"video_transport" => array(
-				"qte" 			=> $result['video_transport'],
-				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementImage']*$infos['distance'],
-				"totalHT" 		=> $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'],
-				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'] ),
-				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['nbrJoursPlus2']*$infos['distance'])
+				"qte" 			=> $result['video_transport']*$infos['distance'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementImage']*2,
+				"totalHT" 		=> $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['distance']*2,
+				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['distance']*2 ),
+				"TotalTTC" 		=> HTTC( $DataPrices['autres']['priceDeplacementImage']*$result['video_transport']*$infos['distance']*2 )
 			),
 
 			/////////////////////////////////////////////// SONORISATION /////////////////////////////////////////////////////////
@@ -307,10 +308,10 @@
 			),
 			"JamSon" => array(
 				"qte" 			=> 1,
-				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
-				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
-				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ] ),
-				"TotalTTC" 		=> HTTC($DataPrices['JamSon'][ $infos['nbrJours'] ])
+				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'],
+				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'],
+				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] ),
+				"TotalTTC" 		=> HTTC($DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] )
 			), 
 			"sonorisation_techniciens" => array(
 				"qte" 			=> $result['sonorisation_techniciens'],
@@ -327,11 +328,11 @@
 				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceHebergementSon']*$result['sonorisation_hebergement']*$infos['nbrJoursPlus2'])
 			),
 			"sonorisation_transport" => array(
-				"qte" 			=> $result['sonorisation_transport'],
-				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementSon']*$infos['distance'],
-				"totalHT" 		=> $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'],
-				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'] ),
-				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['nbrJoursPlus2']*$infos['distance'])
+				"qte" 			=> $result['sonorisation_transport']*$infos['distance'],
+				"prixUnitaire" 	=> $DataPrices['autres']['priceDeplacementSon']*2,
+				"totalHT" 		=> $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['distance']*2,
+				"TVA" 			=> TVA( $DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['distance']*2 ),
+				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceDeplacementSon']*$result['sonorisation_transport']*$infos['distance']*2)
 			), 
 			/////////////////////////////////////////////// Demarches administratives /////////////////////////////////////////////////////////
 			"GestDemarAdmin" => array(
@@ -417,7 +418,7 @@
 			)
 		);
 		$Total = array();
-		$Total["HT"] = $subTotal['videoMapimg']['HT'] + $subTotal['sonorisation']['HT'] + $subTotal['transpHeberg']['HT'] + $subTotal['GestDemarAdmin']['HT'] + $subTotal['options']['HT'];
+		$Total["HT"] = $subTotal['videoMapimg']['HT'] + $subTotal['sonorisation']['HT'] + $subTotal['GestDemarAdmin']['HT'] + $subTotal['options']['HT'];
 
 		if( $result['sonorisation_taxe_sacem'] > 0  ){
 
@@ -526,14 +527,14 @@
 		//Password to use for SMTP authentication
 		$mail->Password = "Xwo@6973nas";
 
-		$mail->setFrom( getContactInfo()['email'], 'ATHEM & SKERTZÒ');
+		$mail->setFrom( getContactInfo()['email'], 'ATHEM');
 		$mail->addAddress( $infos['email'] );
-		$mail->addCC( getContactInfo()['email'] );
-		$mail->Subject  = 'JAMULATEUR - ATHEM & SKERTZÒ';
+		// $mail->addCC( getContactInfo()['email'] );
+		$mail->Subject  = 'JAMULATEUR - ATHEM';
 		$mail->addAttachment( $infos['addAttachment'] );
 		$mail->IsHTML(true); 
 		$mail->CharSet = 'UTF-8';
-		$mail->Body     = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-6-I"/><title>Untitled Document</title></head><body>Madame, Monsieur,<br/><br/>Merci vivement d&rsquo;avoir utilis&eacute; le JAMULATEUR pour r&eacute;aliser votre devis ci joint,<br/><br/>Cette proposition financi&egrave;re peut probablement &ecirc;tre optimis&eacute;e, n&rsquo;h&eacute;sitez pas &agrave; me contacter par courriel ou t&eacute;l&eacute;phone.<br/><br/>Restant &agrave; votre disposition,<br/><br/>Tr&egrave;s cordialement,<br/><br/>Philippe<br/><a href="mailto:contact@athem-skertzo.com">contact@athem-skertzo.com</a><br/>GSM + 33 (0)6 07 32 09 21<br/>ATELIER ATHEM &amp; SKERTZ&Ograve;<br/><a href="http://www.athem-skertzo.com/" target="_blank">ATHEM &amp; SKERTZ&Ograve; WEBSITE</a> - <a href="https://www.facebook.com/athem" target="_blank">FACEBOOK</a> - <a href="https://plus.google.com/u/0/b/101244148760564709999/101244148760564709999/posts" target="_blank">GOOGLE+</a> - <a href="https://www.pinterest.com/stagedbyathem/" target="_blank">PINTEREST</a> - <a href="https://twitter.com/StagedbyATHEM" target="_blank">TWITTER</a></body></html>';
+		$mail->Body     = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-6-I"/><title>Untitled Document</title></head><body>Madame, Monsieur,<br/><br/>Merci vivement d&rsquo;avoir utilis&eacute; le JAMULATEUR pour r&eacute;aliser votre devis ci joint,<br/><br/>Cette proposition financi&egrave;re peut probablement &ecirc;tre optimis&eacute;e, n&rsquo;h&eacute;sitez pas &agrave; me contacter par courriel ou t&eacute;l&eacute;phone.<br/><br/>Restant &agrave; votre disposition,<br/><br/>Tr&egrave;s cordialement,<br/><br/>Philippe<br/><a href="mailto:contact@athem-skertzo.com">contact@athem-skertzo.com</a><br/>GSM + 33 (0)6 07 32 09 21<br/>ATELIER ATHEM<br/><a href="http://www.athem-skertzo.com/" target="_blank">ATHEM WEBSITE</a> - <a href="https://www.facebook.com/athem" target="_blank">FACEBOOK</a> - <a href="https://plus.google.com/u/0/b/101244148760564709999/101244148760564709999/posts" target="_blank">GOOGLE+</a> - <a href="https://www.pinterest.com/stagedbyathem/" target="_blank">PINTEREST</a> - <a href="https://twitter.com/StagedbyATHEM" target="_blank">TWITTER</a></body></html>';
 
 		return ( $mail->send() ) ? true : false;
 	}
@@ -541,9 +542,9 @@
 	function sendEmailToAdmin( $infos ){ 
 
 		// $mail = new PHPMailer;
-		// $mail->setFrom( 'noreply@athem-skertzo.com', 'ATHEM & SKERTZÒ');
+		// $mail->setFrom( 'noreply@athem-skertzo.com', 'ATHEM');
 		// $mail->addAddress( getContactInfo()['email'] );
-		// $mail->Subject  = 'Devis généré - ATHEM & SKERTZÒ';
+		// $mail->Subject  = 'Devis généré - ATHEM';
 		// $mail->addAttachment( $infos['addAttachment'] );
 		// $mail->CharSet = 'UTF-8';
 		// $mail->IsHTML(true); 

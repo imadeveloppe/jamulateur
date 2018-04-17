@@ -402,8 +402,9 @@
 				 						</div>
 				 						<div class="selectContainer">
 				 							<select name="sonorisation_unite">
+				 								<option value="0">0</option> 
 					 							<?php for ($i=1; $i <= $autres[13][2] ; $i++): ?>
-					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 								<option value="<?= $i ?>" <?= ($i == 1) ? 'selected' : '' ?>><?= $i ?></option>   
 					 							<?php endfor; ?>    
 					 						</select>
 				 						</div>
@@ -414,8 +415,9 @@
 				 						</div>
 				 						<div class="selectContainer">
 				 							<select name="sonorisation_techniciens">
+				 								<option value="0">0</option> 
 					 							<?php for ($i=1; $i <= $autres[11][2] ; $i++): ?>
-					 								<option value="<?= $i ?>"><?= $i ?></option>   
+					 								<option value="<?= $i ?>" <?= ($i == 1) ? 'selected' : '' ?> ><?= $i ?></option>   
 					 							<?php endfor; ?>           
 					 						</select>
 				 						</div>
