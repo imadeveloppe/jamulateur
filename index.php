@@ -626,7 +626,7 @@
 			</div>
 
 			<p class="footer-modal">
-				ATHEM & SKERTZÒ - 2 rue René Bazin - 75106 Paris - <br>Siret : 39258871100037
+				ATHEM - 2 rue René Bazin - 75106 Paris - <br>Siret : 39258871100037
 			</p> 
 
 		</form>

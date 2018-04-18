@@ -394,7 +394,7 @@
 				<?php if( $DataCalcule['sonorisation_unite']['totalHT'] > 0 ): ?>
 					<tr>
 						<td>Installation des unités de son</td>
-						<td align="right"><?= $DataCalcule['sonorisation_unite']['qte'] ?></td>
+						<td align="right"><?= $DataCalcule['sonorisation_unite']['qte'] ?> </td>
 						<td>Forfait</td>
 						<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['prixUnitaire'],2,',',' ' ) ?> €</td>
 						<td align="right"><?= number_format($DataCalcule['sonorisation_unite']['totalHT'],2,',',' ' ) ?> €</td>
@@ -407,9 +407,9 @@
 				
 				<?php if( $DataCalcule['JamSon']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Mise à disposition des unités de production</td>
-						<td align="right"><?= $DataCalcule['JamSon']['qte'] ?></td>
-						<td>Forfait</td>
+						<td>Mise à disposition des unités de son</td>
+						<td align="right"><?= $DataCalcule['JamSon']['qte'] ?> x <?= $infos['nbrJours'] ?></td>
+						<td>Jour(s)</td>
 						<td align="right"><?= number_format($DataCalcule['JamSon']['prixUnitaire'],2,',',' ' ) ?> €</td>
 						<td align="right"><?= number_format($DataCalcule['JamSon']['totalHT'],2,',',' ' ) ?> €</td>
 						<td align="center">20%</td>
@@ -552,7 +552,7 @@
 
 				<?php if( $DataCalcule['siteWeb']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Réalisation d'un site Internet dédié au projet	 </td>
+						<td>Réalisation d'un site Internet dédié au projet</td>
 						<td align="right"><?= $DataCalcule['siteWeb']['qte'] ?></td>
 						<td>Forfait</td>
 						<td align="right"><?= number_format($DataCalcule['siteWeb']['prixUnitaire'],2,',',' ' ) ?> €</td>

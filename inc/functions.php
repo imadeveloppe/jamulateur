@@ -308,8 +308,8 @@
 			),
 			"JamSon" => array(
 				"qte" 			=> 1,
-				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'],
-				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'],
+				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ] * $result['sonorisation_unite'],
+				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ] * $result['sonorisation_unite'],
 				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] ),
 				"TotalTTC" 		=> HTTC($DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] )
 			), 
