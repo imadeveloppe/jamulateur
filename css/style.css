@@ -418,9 +418,9 @@ p.decriptionService.active{
 }
 .boucles .range > img.graduations_10_100,
 .boucles .range > img.graduations_5_50 {
-    margin-right: 9px;
-    width: 195px;
-    display: none;
+    margin-right: 10px;
+    width: 186px;
+    display: none
 }
 .boucles .jcf-range .jcf-range-display-wrapper { 
     left: 10px;

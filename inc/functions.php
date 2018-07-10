@@ -9,15 +9,15 @@
 	}
 	function db_connect(){
 		
-		$servername = "localhost";
-		$username = "jamuser";
-		$password = "J@MZTO2o18"; // 
-		$dbname = "jamulateur";
-
 		// $servername = "localhost";
-		// $username = "root";
-		// $password = "root"; // Zento&EI@2017
-		// $dbname = "jammulator";
+		// $username = "jamuser";
+		// $password = "J@MZTO2o18"; // 
+		// $dbname = "jamulateur";
+
+		$servername = "localhost";
+		$username = "root";
+		$password = "root"; // Zento&EI@2017
+		$dbname = "jammulator";
 
 		try {
 			    $db = new PDO("mysql:host=$servername;dbname=".$dbname, $username, $password);
@@ -38,8 +38,8 @@
 	}
 
 	function datediff($dateDebut, $dateFin){ 
-		$datediff = $dateFin - $dateDebut; 
-		return floor($datediff / (60 * 60 * 24));
+		$datediff_ = $dateFin - $dateDebut; 
+		return floor($datediff_ / (60 * 60 * 24))+1;
 	}
 	function getContactInfo()
 	{
@@ -207,6 +207,7 @@
 			"lieu"			=> $result['lieu']
 
 		);
+ 
 		$DataPrices = getDataPrices(); 
 
 
@@ -248,6 +249,7 @@
 		$DataCalcule = array(
 			/////////////////////////////////////////// VIDÉO MAPPING /////////////////////////////////////////////////////////////
 			"visuel" => array(
+				"type" 			=> $result['visuel'], 
 				"qte" 			=> $result['nbrBoucles'],
 				"prixUnitaire" 	=> $DataPrices['visuel'][ $result['visuel'] ],
 				"totalHT" 		=> $DataPrices['visuel'][ $result['visuel'] ] * $result['nbrBoucles'],
@@ -263,7 +265,7 @@
 			),
 			"JamMobile" => array(
 				"qte" 			=> 1,
-				"prixUnitaire" 	=> $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'],
+				"prixUnitaire" 	=> $DataPrices['JamMobile'][ $infos['nbrJours'] ],
 				"totalHT" 		=> $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'],
 				"TVA" 			=> TVA( $DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'] ),
 				"TotalTTC" 		=> HTTC($DataPrices['JamMobile'][ $infos['nbrJours'] ] * $result['video_jamions'] ) 
@@ -293,6 +295,7 @@
 
 			/////////////////////////////////////////////// SONORISATION /////////////////////////////////////////////////////////
 			"son" => array(
+				"type" 			=> $result['son'], 
 				"qte" 			=> $result['nbrBoucles'],
 				"prixUnitaire" 	=> $DataPrices['son'][ $result['son'] ],
 				"totalHT" 		=> $DataPrices['son'][ $result['son'] ] * $result['nbrBoucles'],
@@ -307,8 +310,8 @@
 				"TotalTTC" 		=> HTTC($DataPrices['autres']['priceVehiculeSon']*$result['sonorisation_unite'])
 			),
 			"JamSon" => array(
-				"qte" 			=> 1,
-				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ] * $result['sonorisation_unite'],
+				"qte" 			=> $result['sonorisation_unite'],
+				"prixUnitaire" 	=> $DataPrices['JamSon'][ $infos['nbrJours'] ],
 				"totalHT" 		=> $DataPrices['JamSon'][ $infos['nbrJours'] ] * $result['sonorisation_unite'],
 				"TVA" 			=> TVA( $DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] ),
 				"TotalTTC" 		=> HTTC($DataPrices['JamSon'][ $infos['nbrJours'] ]* $result['sonorisation_unite'] )
@@ -389,6 +392,7 @@
 			),
 
 		);
+ 
 
 		$subTotal = array(
 			"videoMapimg" => array(

@@ -4,7 +4,8 @@ if( isset($_POST['type']) ):
 	$db = db_connect();
 	
 	 
-	
+	$tab = $_POST['tab'];
+	unset($_POST['tab']);
 		 
 	switch ( $_POST['type'] ) {
 		case 'JamMobile':
@@ -17,7 +18,7 @@ if( isset($_POST['type']) ):
 
 		case 'JamSon':
 			unset($_POST['type']);
-
+			
 			foreach ($_POST as $key => $value) {
 				$db->exec("UPDATE JamSon SET price = '$value' WHERE idJamSon = $key");
 			}
@@ -65,7 +66,7 @@ if( isset($_POST['type']) ):
 		 
 	}
 
-	header('location:prices.php?tab='.$_POST['tab']);
+	header('location:prices.php?tab='.$tab);
 
 
 endif;

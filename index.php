@@ -227,7 +227,7 @@
 		 					 	<option value="9">9</option>
 		 					 	<option value="10">10</option> 
 		 					 </select>
-		 					 <input type="text" name="nbrBouclesInput" value="5">
+		 					 <input type="text" name="nbrBouclesInput" value="3">
 		 				</div>
 		 			</div>
 		 		</div>
@@ -690,8 +690,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script> 
 <script type="text/javascript" src="js/bootstrap-datepicker.fr.js"></script>   
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyBeQzg0JQbYmapoySNogo2YMjE10qS8xBo&language=fr"></script>  
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyD9qWb51Zg3oUowbJHGox-VCWu4C5zDOzs&language=fr"></script>  -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,geometry,geocoder&key=AIzaSyDdE2jgrKygv7hNryyAkvlr3zQq3c_wBu8&language=fr"></script>   
 
 <script type="text/javascript" src="js/script.js"></script> 
 <script type="text/javascript"> 
@@ -703,10 +702,8 @@ $(function() {
 		 autoclose: true,
 		 startDate: getDate(2),
 		 language: "fr"
-	}).on('changeDate', function (event) { 
-		var date2 = event.date;
-		date2.setDate( date2.getDate()+1 ); 
-		$('[name=dateFin]').datepicker('setStartDate', date2 );
+	}).on('changeDate', function (event) {  
+		$('[name=dateFin]').datepicker('setStartDate', event.date );
 
 		calculate();
 
@@ -716,10 +713,8 @@ $(function() {
 		 autoclose: true,
 		 startDate: getDate(3),
 		 language: "fr"
-	}).on('changeDate', function (event) { 
-		var date1 = event.date;
-		date1.setDate( date1.getDate()-1 ); 
-		$('[name=dateDebut]').datepicker('setEndDate', date1 );
+	}).on('changeDate', function (event) {  
+		$('[name=dateDebut]').datepicker('setEndDate', event.date );
 
 		calculate();
 

@@ -139,7 +139,7 @@ if(isset($_POST['address'],$_POST['id'])){
                 <!-- Custom Tabs -->
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                      <li class="<?= (!isset($_GET['tab']) || $_GET['tab'] == 1 ) ? 'active' : '' ?>"><a href="#tab_1" data-toggle="tab">Jam Mobile</a></li>
+                      <li class="<?= (!isset($_GET['tab']) || $_GET['tab'] == 1 || $_GET['tab'] == '' ) ? 'active' : '' ?>"><a href="#tab_1" data-toggle="tab">Jam Mobile</a></li>
                       <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 2 ) ? 'active' : '' ?>"><a href="#tab_2" data-toggle="tab">Jam Son</a></li>
                       <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 3 ) ? 'active' : '' ?>"><a href="#tab_3" data-toggle="tab">Les Visuels</a></li> 
                       <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 4 ) ? 'active' : '' ?>"><a href="#tab_4" data-toggle="tab">Le Son</a></li> 
@@ -147,7 +147,7 @@ if(isset($_POST['address'],$_POST['id'])){
                       <li class="<?= (isset($_GET['tab']) && $_GET['tab'] == 6 ) ? 'active' : '' ?>"><a href="#tab_6" data-toggle="tab">Paramétrage</a></li>  
                     </ul>
                     <div class="tab-content">
-                      <div class="tab-pane <?= (!isset($_GET['tab']) || $_GET['tab'] == 1 ) ? 'active' : '' ?>" id="tab_1">
+                      <div class="tab-pane <?= (!isset($_GET['tab']) || $_GET['tab'] == 1 || $_GET['tab'] == '' ) ? 'active' : '' ?>" id="tab_1">
                         <form method="post" action="update-prices.php">
                           <div class="row form-group">
                            <label class="col-xs-2"  align="right">Nombre de jour</label>
@@ -172,6 +172,7 @@ if(isset($_POST['address'],$_POST['id'])){
                            <label class="col-xs-2"  align="right"></label>
                            <label class="col-xs-10">
                              <input type="hidden" name="type" value="JamMobile">
+                             <input type="hidden" name="tab" value="1">
                              <button class="btn btn-block btn-success">Mise à jour</button>
                            </label>
                           </div>

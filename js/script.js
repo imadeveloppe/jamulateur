@@ -73,7 +73,7 @@
 
                                       country = results[0].address_components[i]; 
                                       console.log(results)
-                                      if( country.long_name == "France" ){
+                                      if( $.inArray(country.short_name.toLowerCase(), countriesCodes) >= 0 ){
                                             var hasZipCode = 0;
                                             isVille = false
                                             for (var k=0; k < results[0].address_components.length; k++) {
@@ -87,16 +87,17 @@
                                                 }
                                             }
                                             setTimeout(function () {
-                                                if(hasZipCode == 0){
+                                                
+                                                if(hasZipCode == 0 && !isVille ){
                                                     $('#formDevis [name=cp]').val( '' ).valid();
                                                     $('#formDevis [name=ville]').val( '' ).valid();
                                                     $('#error').modal('show').find('center p').text("L'adresse que vous avez saisie est invalide")
                                                     $('[name=distance]').val( "-1" )
                                                     reject();
                                                 }
-                                            })
+                                            },2000)
                                             resolve( results[0].geometry.location )
-                                      }else{
+                                      }else{ 
                                         $('#formDevis [name=cp]').val( '' ).valid();
                                         $('#formDevis [name=ville]').val( '' ).valid();
                                         $('#error').modal('show').find('center p').text("L'adresse que vous avez saisie est invalide")
@@ -170,7 +171,7 @@
         var timeDiff = date2.getTime() - date1.getTime(); 
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
-        return diffDays;
+        return diffDays+1;
     }
     function number_format (number, decimals, dec_point, thousands_sep) {
         // Strip all characters but numerical ones.
@@ -261,6 +262,8 @@
                 $('[name=devis]').removeClass('loading'); 
                 
                 var nbrJour = DatesDiffrence( data.dateDebut, data.dateFin );  
+
+                console.log(" nbrJour ",nbrJour)
 
                 ///Required Price
                 if( nbrJour <= 90 ){
@@ -528,6 +531,7 @@
 ///////////******* Les evenement Jquery *******//////////////
 var filesInputElement = {};
 var interval = false;
+var countriesCodes = ["fr","pt","es","be","lu","nl","de","ch","at","cz","pl","si","hu","sk"];
 (function ($) { 
     setTimeout(function () { 
         interval = false;
@@ -564,17 +568,17 @@ var interval = false;
 
         if( dataIndex == 'creationOriginale' ){
 
-            $('input[name=nbrBouclesInput]').val( 5 )
+            $('input[name=nbrBouclesInput]').val( 3 )
             $('select[name=nbrBouclesSelect]').val( 1 )
 
             $('.table.boucles .customLabel .titleCreationOriginal').show()
             $('.table.boucles .customLabel .titleDefault').hide()
             setTimeout(function () {
-                $('[name=nbrBoucles]').val(5)
+                $('[name=nbrBoucles]').val(3)
                 interval = false;
                 calculate();
             })
-            $('[name=nbrBoucles]').attr('min', 5).attr('max', 50).attr('step', 5) 
+            $('[name=nbrBoucles]').attr('min', 3).attr('max', 50).attr('step', 1) 
             $('img.graduations_1_10').hide()
             $('img.graduations_5_50').show() 
             $('[name=nbrBouclesInput]').show() 
@@ -600,17 +604,17 @@ var interval = false;
 
         }else if( dataIndex == 'performanceArt' ){
 
-            $('input[name=nbrBouclesInput]').val( 5 )
-            $('select[name=nbrBouclesSelect]').val( 5 )
+            $('input[name=nbrBouclesInput]').val( 3 )
+            $('select[name=nbrBouclesSelect]').val( 3 )
 
             $('.table.boucles .customLabel .titleCreationOriginal').show()
             $('.table.boucles .customLabel .titleDefault').hide()
             setTimeout(function () {
-                $('[name=nbrBoucles]').val(5)
+                $('[name=nbrBoucles]').val(3)
                 interval = false;
                 calculate();
             })
-            $('[name=nbrBoucles]').attr('min', 5).attr('max', 50).attr('step', 5)
+            $('[name=nbrBoucles]').attr('min', 3).attr('max', 50).attr('step', 1)
             $('img.graduations_1_10').hide()
             $('img.graduations_5_50').show() 
             $('[name=nbrBouclesInput]').show()
@@ -942,13 +946,14 @@ var interval = false;
     }) 
 
     /// google maps auto complate
+    
     google.maps.event.addDomListener(window, 'load', function () {
 
         var input = document.getElementById('rue');
         var autocomplete = new google.maps.places.Autocomplete(input, { 
           types: ['address'],
           componentRestrictions: { 
-            country: ["fr"] 
+            country: countriesCodes
           }
         });
 
@@ -1104,4 +1109,4 @@ var interval = false;
  
 })(jQuery, window, document);
 
-////////////******* Fin validations  *******//////////////
+////////////******* Fin validations  *******////////////// 

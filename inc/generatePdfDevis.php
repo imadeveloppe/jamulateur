@@ -243,7 +243,9 @@
 			<p style="text-align: right; padding: 5px;background:#f3f3f3;">
 				Ce devis sera validé après inspection du site par les équipes d'ATHEM<br> 
 				La protection des publics, des biens et du matériel de projection sont à la charge du client<br>	 
-				Ce devis n'intègre pas les droits d'utilisation des contenus devant être acquis auprès de tiers
+				Ce devis n'intègre pas les droits d'utilisation des contenus devant être acquis auprès de tiers,<br>
+				ainsi que les éventuels droits d’asile, location d’espace ou taxes.<br>
+				Pour une projection 30mn après la tombée de la nuit (horaires à définir).
 			</p>
 
 			<table style="margin-top: 10px;" class="detailDevis" cellpadding="0" cellspacing="0">
@@ -274,7 +276,21 @@
 
 				<?php if( $DataCalcule['visuel']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Bibliothèque de contenus prêts à jammer</td>
+						<td> 
+							<?php switch ( $DataCalcule['visuel']['type'] ) {
+								case 'creationOriginale':
+									echo "Création originale";
+									break; 
+
+								case 'pretJammer':
+									echo "Bibliothèque de contenus prêts à jammer";
+									break; 
+
+								case 'performanceArt':
+									echo "Performance art";
+									break; 
+							} ?>
+						</td>
 						<td align="right"><?= $DataCalcule['visuel']['qte'] ?></td>
 						<td>Minutes</td>
 						<td align="right"><?= number_format($DataCalcule['visuel']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -288,7 +304,7 @@
 				
 				<?php if( $DataCalcule['video_jamions']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Installation des jamions</td>
+						<td>Installation des jamions (compris une soirée de projection)</td>
 						<td align="right"><?= $DataCalcule['video_jamions']['qte'] ?></td>
 						<td>Forfait</td>
 						<td align="right"><?= number_format($DataCalcule['video_jamions']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -302,8 +318,8 @@
 
 				<?php if( $DataCalcule['JamMobile']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Mise à disposition des jamions</td>
-						<td align="right"><?= $DataCalcule['video_jamions']['qte'] ?> x <?= $infos['nbrJours'] ?></td>
+						<td>Mise à disposition des jamions (jours supplémentaires au delà de la 1ère soirée)</td>
+						<td align="right"><?= $DataCalcule['video_jamions']['qte'] ?> x <?= ( $infos['nbrJours'] == 1 ) ? 1 : ($infos['nbrJours'] - 1) ?></td>
 						<td>Jour(s)</td>
 						<td align="right"><?= number_format($DataCalcule['JamMobile']['prixUnitaire'],2,',',' ' ) ?> €</td>
 						<td align="right"><?= number_format($DataCalcule['JamMobile']['totalHT'],2,',',' ' ) ?> €</td>
@@ -379,7 +395,22 @@
 
 				<?php if( $DataCalcule['son']['totalHT'] > 0 ): ?>
 					<tr>
-						<td>Son éxistant</td>
+						<td>
+						<?php switch ( $DataCalcule['son']['type'] ) {
+								case 'creationOriginale':
+									echo "Création originale";
+									break; 
+
+								case 'pretJammer':
+									echo "Musique existante";
+									break; 
+
+								case 'pasDeSon':
+									echo "Pas de son";
+									break; 
+							} ?>
+							
+						</td>
 						<td align="right"><?= $DataCalcule['son']['qte'] ?></td>
 						<td>Minutes</td>
 						<td align="right"><?= number_format($DataCalcule['son']['prixUnitaire'],2,',',' ' ) ?> €</td>
@@ -480,7 +511,7 @@
 				<?php if( $DataCalcule['GestDemarAdmin']['totalHT'] > 0 ): ?>
 					<tr>
 						<td>Gestion des demarches administratives</td>
-						<td align="right"><?= ($DataCalcule['GestDemarAdmin']['qte'] > 0) ? $infos['nbrJours'] : 0 ?></td>
+						<td align="right"><?= $DataCalcule['GestDemarAdmin']['qte'] ?></td>
 						<td>Forfait</td>
 						<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['prixUnitaire'],2,',',' ' ) ?> €</td>
 						<td align="right"><?= number_format($DataCalcule['GestDemarAdmin']['totalHT'],2,',',' ' ) ?> €</td>
@@ -646,8 +677,7 @@
 			<table style="margin-top: 20px;margin-bottom: 10px;">
 				<tr>
 					<td>
-						Merci vivement d'avoir sollicité notre atelier,<br>
-						Signature du client (précédée de la mention « Bon pour accord »)<br>	 
+						Merci vivement d'avoir sollicité notre atelier,<br>  
 						N'hésitez pas à me contacter pour plus de précision,<br> 	 	 	 	 	 	 	 	 
 						Très cordialement,
 						<br>
