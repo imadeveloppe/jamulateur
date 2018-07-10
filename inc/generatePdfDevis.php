@@ -223,6 +223,24 @@
 									<?= $infos['lieu'] ?>
 								</td>
 							</tr>
+							<tr>
+								<td align="right">
+									Ville
+								</td>
+								<td>
+									<?= $infos['villeEvent'] ?>
+								</td>
+							</tr>
+							<?php if( !empty($infos['paysEvent']) ): ?>
+								<tr>
+									<td align="right">
+										Pays
+									</td>
+									<td>
+										<?= $infos['paysEvent'] ?>
+									</td>
+								</tr>
+						<?php endif; ?>
 
 						</table> 
 					</td>
@@ -234,7 +252,8 @@
 						<p> <?= $infos['societe'] ?><br>
 							<?= $infos['fname'] ?> <?= $infos['lname'] ?><br>
 							<?= $infos['address1'] ?><br>
-							<?= $infos['cp'] ?> - <?= $infos['ville'] ?>
+							<?= $infos['cp'] ?> - <?= $infos['ville'] ?><br>
+							<?= $infos['pays'] ?>
 						</p>
 					</td>
 				</tr>

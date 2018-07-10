@@ -12,6 +12,7 @@ if(isset($_POST)):
 
 	$dateDebut 	= strtotime( $dateDebut );
 	$dateFin 	= strtotime( $dateFin );
+ 
 
 	$query = $db->query(" INSERT INTO `devis` (
 
@@ -20,6 +21,7 @@ if(isset($_POST)):
 	 	`rueEvent`, 
 	 	`cpEvent`, 
 	 	`villeEvent`,
+	 	`paysEvent`,
 	 	`distance`,
 	 	`largeur`, 
 	 	`hauteur`, 
@@ -53,6 +55,7 @@ if(isset($_POST)):
 	 	`address2`,  
 	 	`cp`,
 	 	`ville`,
+	 	`pays`,
 	 	`dateDevis`) 
 
 	 	VALUES (
@@ -62,6 +65,7 @@ if(isset($_POST)):
 	 	'$rueEvent', 
 	 	'$cpEvent',
 	 	'$villeEvent', 
+	 	'$paysEvent', 
 	 	'$distance', 
 	 	'$largeur', 
 	 	'$hauteur', 
@@ -95,6 +99,7 @@ if(isset($_POST)):
 	 	'$address2',  
 	 	'$cp', 
 	 	'$ville', 
+	 	'$pays', 
 	 	'$time_stamp' )"
 	);
 

@@ -436,6 +436,7 @@
         formData.append("rueEvent"      , $('#formDevis [name=rue]').val() ); 
         formData.append("cpEvent"       , $('#formDevis [name=cp]').val() ); 
         formData.append("villeEvent"    , $('#formDevis [name=ville]').val() ); 
+        formData.append("paysEvent"    , $('#formDevis [name=pays]').val() ); 
         formData.append("largeur"       , $('#formDevis [name=rangeL]').val() ); 
         formData.append("hauteur"       , $('#formDevis [name=rangeH]').val() ); 
         formData.append("dateDebut"     , $('#formDevis [name=dateDebut]').val() ); 
@@ -468,6 +469,7 @@
         formData.append("address2"      , $('#SendDevis [name=address2]').val() ); 
         formData.append("cp"            , $('#SendDevis [name=cp]').val() ); 
         formData.append("ville"         , $('#SendDevis [name=ville]').val() ); 
+        formData.append("pays"         , $('#SendDevis [name=pays]').val() ); 
 
         // HTML file input, chosen by user   
         $.each(filesInputElement, function(index, file){
@@ -963,6 +965,7 @@ var countriesCodes = ["fr","pt","es","be","lu","nl","de","ch","at","cz","pl","si
             $('#formDevis [name=rue]').val( data.route )
             $('#formDevis [name=cp]').val( data.zipcode )
             $('#formDevis [name=ville]').val( data.city ) 
+            $('#formDevis [name=pays]').val( data.country ) 
 
             setTimeout(function () { 
                 if( !$("#formDevis [name=cp]").valid() ) return false;
@@ -1005,7 +1008,7 @@ var countriesCodes = ["fr","pt","es","be","lu","nl","de","ch","at","cz","pl","si
                     },
                     cp:{  
                         required: true,  
-                        minlength: 5
+                        minlength: 4
                     },
                     ville:{  
                         required: true,  

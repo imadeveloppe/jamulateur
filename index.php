@@ -93,6 +93,17 @@
 	 					</div>
 	 				</div>
 	 			</div>
+	 			<div class="table">
+	 				<div>
+	 					<div class="customLabel"> 
+	 					</div> 
+	 					<div class="adresse"> 
+	 						<div> 
+		 						<input type="text" name="pays" placeholder="Pays">  
+	 						</div>
+	 					</div>
+	 				</div>
+	 			</div>
 
 	 			<div class="dimensions">
 	 				<div class="table">
@@ -608,6 +619,12 @@
 			    </div>
 			    <div class="col-sm-5">
 			      <input class="form-control" name="ville" placeholder="Ville">
+			    </div> 
+			</div>
+			<div class="form-group">
+			    <label  class="col-sm-3 control-label"></label> 
+			    <div class="col-sm-9">
+			      <input class="form-control" name="pays" placeholder="Pays">
 			    </div>
 			</div>
 			<div class="privacy-policy">

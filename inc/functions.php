@@ -9,15 +9,15 @@
 	}
 	function db_connect(){
 		
-		// $servername = "localhost";
-		// $username = "jamuser";
-		// $password = "J@MZTO2o18"; // 
-		// $dbname = "jamulateur";
-
 		$servername = "localhost";
-		$username = "root";
-		$password = "root"; // Zento&EI@2017
-		$dbname = "jammulator";
+		$username = "jamuser";
+		$password = "J@MZTO2o18"; // 
+		$dbname = "jamulateur";
+
+		// $servername = "localhost";
+		// $username = "root";
+		// $password = "root"; // Zento&EI@2017
+		// $dbname = "jammulator";
 
 		try {
 			    $db = new PDO("mysql:host=$servername;dbname=".$dbname, $username, $password);
@@ -33,7 +33,7 @@
 
 	function getTypeLabel($idType){
 		$db = db_connect();
-		$query = $db->query("SELECT * from types where idType = $idType ");
+		$query = $db->query("SELECT * from types where idType = $idType "); 
 		return $query->fetchAll()[0]['name'];
 	}
 
@@ -192,7 +192,9 @@
 			"societe" 		=> $result['societe'],
 			"address1"  	=> $result['address1'],
 			"cp" 			=> $result['cp'],
+			"villeEvent"	=> $result['villeEvent'], 
 			"ville"			=> $result['ville'], 
+			"paysEvent"			=> $result['paysEvent'], 
 			"distance"			=> $result['distance'], 
 
 			"dateDebut"		=> getFrenchDate( $result['dateDebut'] ),
@@ -204,7 +206,8 @@
 
 			"options"		=> ( !empty($result['options']) && strpos(',', $result['options']) !== false ) ? array($result['options']) : explode(',', $result['options']),
 			"contact"		=> getContactInfo(),
-			"lieu"			=> $result['lieu']
+			"lieu"			=> $result['lieu'],
+			"pays"			=> $result['pays']
 
 		);
  
